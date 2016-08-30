@@ -46,10 +46,11 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:handleCancel))
         alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
             newRoute.difficulty = "Rank:\(self.tField.text!)"
-            var currentCenter = [CGPoint]()
+            var currentCenter = [String]()
             for view: UIView in self.view.subviews {
                 if (view is UIImageView) {
-                    currentCenter.append(view.center)
+                    let center = NSStringFromCGPoint(view.center)
+                    currentCenter.append(center)
                 }
             }
             newRoute.center = currentCenter
@@ -79,7 +80,7 @@ class ViewController: UIViewController {
     
     func handleCancel(alertView: UIAlertAction!)
     {
-        print("Cancelled !!")
+        
     }
     
     func refresh(){

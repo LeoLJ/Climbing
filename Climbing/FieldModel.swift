@@ -34,10 +34,10 @@ class FieldModel: NSObject  {
 
 class Route: NSObject {
     var difficulty: String?
-    var center: [CGPoint]?
+    var center: [String]?
     var rankList: [RankList] = []
     
-    init (difficulty: String? ,center: [CGPoint]?, rankList:[RankList]) {
+    init (difficulty: String? ,center: [String]?, rankList:[RankList]) {
         self.difficulty = difficulty
         self.center = center
         self.rankList = rankList
@@ -56,6 +56,16 @@ class Route: NSObject {
 //        aCoder.encodeObject(center, forKey: "center")
 //    }
 }
+
+//class Cneter: NSObject {
+//    var centerX: String?
+//    var centerY: [CGPoint]?
+//    
+//    init (centerX: String? ,centerY: [CGPoint]?) {
+//        self.centerX = centerX
+//        self.centerY = centerY
+//    }
+//}
 
 class RankList: NSObject {
     var name: String?

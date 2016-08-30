@@ -55,7 +55,7 @@ class timeToPlayVC: UIViewController {
     func creatTarget(i:Int) {
         let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)")
         newTarget.image.tag = Int(newTarget.id!)
-        newTarget.image.center = FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i]
+        newTarget.image.center = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
         TargetHouse.shareInstance.currentTargets.append(newTarget)
         view.addSubview(newTarget.image)
     }

@@ -10,10 +10,14 @@ import UIKit
 
 class FieldCollection {
     static let shareInstance = FieldCollection()
-    
+    let userDefault = NSUserDefaults.standardUserDefaults()
+
     var currentField = [FieldModel]() {
         didSet {
             NSNotificationCenter.defaultCenter().postNotificationName("reload:", object: nil)
+            let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
+            self.userDefault.setValue(data, forKey: "currentField")
+            self.userDefault.synchronize()
         }
     }
 }

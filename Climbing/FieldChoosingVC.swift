@@ -14,10 +14,10 @@ class FieldChoosingVC: UIViewController {
     let userDefault = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if self.userDefault.valueForKey("currentField") != nil {
-//            let data = self.userDefault.valueForKey("currentField") as! NSData
-//            FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
-//        }
+        if self.userDefault.valueForKey("currentField") != nil {
+            let data = self.userDefault.valueForKey("currentField") as! NSData
+            FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
+        }
         self.navigationController?.navigationBarHidden = true
         
         self.fieldTableView.dataSource = self

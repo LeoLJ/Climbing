@@ -9,7 +9,6 @@
 import UIKit
 
 class CheckFieldVC: UIViewController {
-    let userDefault = NSUserDefaults.standardUserDefaults()
     var index: Int?
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -47,9 +46,6 @@ class CheckFieldVC: UIViewController {
     
     func reload() {
         self.difficultyTableView.reloadData()
-        let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
-        self.userDefault.setValue(data, forKey: "currentField")
-        self.userDefault.synchronize()
     }
     
 

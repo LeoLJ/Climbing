@@ -25,7 +25,9 @@ class timeToPlayVC: UIViewController {
         view.backgroundColor = UIColor.blackColor()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(timeToPlayVC.tapBubbleOnce), name: "tapBubbleOnce:", object: nil)
         rankLabel.text = FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty
+        if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count != 0 {
         displayAll()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,15 +36,15 @@ class timeToPlayVC: UIViewController {
     }
     
     func displayAll() {
-        if mode == "Default" {
-            for i in 0...FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count-1 {
-                creatTarget(i)
-            }
-        }else if mode == "Escalation"{
-            creatTarget(0)
-            
-        }else if mode == "Random" {
-            creatTarget(0)
+            if mode == "Default" {
+                for i in 0...FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count-1 {
+                    creatTarget(i)
+                }
+            }else if mode == "Escalation"{
+                creatTarget(0)
+                
+            }else if mode == "Random" {
+                creatTarget(0)
         }
     }
     

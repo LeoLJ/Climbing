@@ -26,4 +26,11 @@ class FieldCollection {
 //        childRef.setValue(value)
 //        }
 //    }
+    
+    func updateToDefault() {
+        
+         let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
+         self.userDefault.setValue(data, forKey: "currentField")
+         self.userDefault.synchronize()
+    }
 }

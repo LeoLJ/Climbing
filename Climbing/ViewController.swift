@@ -56,11 +56,12 @@ class ViewController: UIViewController {
             }
             newRoute.center = currentCenter
             FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
-            let ref = FIRDatabase.database().reference()
-            let childRef = ref.child("Trainer").child("FieldName")
-            let childRefWithKey = childRef.child(childRef.key).child(FieldCollection.shareInstance.currentField[self.index!].fieldName!)
-            let value = ["difficulty": self.tField.text!]
-            childRefWithKey.updateChildValues(value)
+//            let ref = FIRDatabase.database().reference()
+//            let childRef = ref.child("Trainer").child("FieldName")
+//            let childRefWithKey = childRef.child(childRef.key).child(FieldCollection.shareInstance.currentField[self.index!].fieldName!)
+//            let value = ["difficulty": self.tField.text!]
+//            childRefWithKey.updateChildValues(value)
+            FieldCollection.shareInstance.updateToDefault()
             self.deleteTarget()
         }))
         self.presentViewController(alert, animated: true, completion: {

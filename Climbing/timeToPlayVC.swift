@@ -187,6 +187,7 @@ extension timeToPlayVC {
                 newHolder.time = self.timeLabel.text
                 newHolder.mode = self.mode
                 FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
+                FieldCollection.shareInstance.updateToDefault()
 //                let ref = FIRDatabase.database().reference()
 //                for i in 0...FieldCollection.shareInstance.currentField.count-1 {
 //                    let childRef = ref.child("Trainer").child("Field").child("\(FieldCollection.shareInstance.currentField[i].fieldName!)")

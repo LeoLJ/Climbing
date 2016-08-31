@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0576335209BD368489FF1AB7 /* Pods_ClimbingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9017AD3CF0F2EDBD0FBC2347 /* Pods_ClimbingUITests.framework */; };
+		698F972B5F12D60F2F93FC73 /* Pods_Climbing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3003985233E6E979B35332 /* Pods_Climbing.framework */; };
+		9C8410C5CA5A3F3047E4343B /* Pods_ClimbingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FC677D147DE87C4A55AA861 /* Pods_ClimbingTests.framework */; };
 		A684B7911D701D5A0030FA1A /* FieldChoosingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B7901D701D5A0030FA1A /* FieldChoosingVC.swift */; };
 		A684B7931D701F090030FA1A /* FieldCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B7921D701F090030FA1A /* FieldCollection.swift */; };
 		A684B7951D702A860030FA1A /* AddFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A684B7941D702A860030FA1A /* AddFieldView.xib */; };
@@ -15,6 +18,7 @@
 		A684B79D1D7062260030FA1A /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B79C1D7062260030FA1A /* FieldModel.swift */; };
 		A684B79F1D7185C10030FA1A /* timeToPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B79E1D7185C10030FA1A /* timeToPlayVC.swift */; };
 		A699E2391D74531700C58121 /* chartsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A699E2381D74531700C58121 /* chartsVC.swift */; };
+		A6BF3F6D1D76789D00C4BEBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6BF3F6C1D76789D00C4BEBE /* GoogleService-Info.plist */; };
 		A6D34C9C1D5B1D3C006E3423 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D34C9B1D5B1D3C006E3423 /* AppDelegate.swift */; };
 		A6D34C9E1D5B1D3C006E3423 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D34C9D1D5B1D3C006E3423 /* ViewController.swift */; };
 		A6D34CA11D5B1D3C006E3423 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6D34C9F1D5B1D3C006E3423 /* Main.storyboard */; };
@@ -45,6 +49,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FC677D147DE87C4A55AA861 /* Pods_ClimbingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClimbingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2223D28AB32B7A916D46F1D0 /* Pods-Climbing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Climbing.release.xcconfig"; path = "Pods/Target Support Files/Pods-Climbing/Pods-Climbing.release.xcconfig"; sourceTree = "<group>"; };
+		3D08C8DC15B169F7B1CE5EA6 /* Pods-ClimbingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimbingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClimbingUITests/Pods-ClimbingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9017AD3CF0F2EDBD0FBC2347 /* Pods_ClimbingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClimbingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DF43942FB7E7E2985666BA4 /* Pods-ClimbingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimbingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClimbingTests/Pods-ClimbingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9F3003985233E6E979B35332 /* Pods_Climbing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Climbing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A09D5743B849AA1C041930E1 /* Pods-ClimbingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimbingUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClimbingUITests/Pods-ClimbingUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A684B7901D701D5A0030FA1A /* FieldChoosingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldChoosingVC.swift; sourceTree = "<group>"; };
 		A684B7921D701F090030FA1A /* FieldCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollection.swift; sourceTree = "<group>"; };
 		A684B7941D702A860030FA1A /* AddFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFieldView.xib; sourceTree = "<group>"; };
@@ -53,6 +64,7 @@
 		A684B79C1D7062260030FA1A /* FieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
 		A684B79E1D7185C10030FA1A /* timeToPlayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeToPlayVC.swift; sourceTree = "<group>"; };
 		A699E2381D74531700C58121 /* chartsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chartsVC.swift; sourceTree = "<group>"; };
+		A6BF3F6C1D76789D00C4BEBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A6D34C981D5B1D3C006E3423 /* Climbing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Climbing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6D34C9B1D5B1D3C006E3423 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6D34C9D1D5B1D3C006E3423 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +81,8 @@
 		A6D34CC91D5B1E42006E3423 /* TargetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetModel.swift; sourceTree = "<group>"; };
 		A6D34CCB1D5B229D006E3423 /* TargetFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetFactory.swift; sourceTree = "<group>"; };
 		A6D34CCD1D5B2D28006E3423 /* TargetHouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetHouse.swift; sourceTree = "<group>"; };
+		B1AEAD32CF4247BFAC811F76 /* Pods-ClimbingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimbingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClimbingTests/Pods-ClimbingTests.release.xcconfig"; sourceTree = "<group>"; };
+		EBEEDE89F94DABB6CD200AD2 /* Pods-Climbing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Climbing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Climbing/Pods-Climbing.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698F972B5F12D60F2F93FC73 /* Pods_Climbing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C8410C5CA5A3F3047E4343B /* Pods_ClimbingTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,12 +106,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0576335209BD368489FF1AB7 /* Pods_ClimbingUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		473B0A7EE060DE526B4A96C1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EBEEDE89F94DABB6CD200AD2 /* Pods-Climbing.debug.xcconfig */,
+				2223D28AB32B7A916D46F1D0 /* Pods-Climbing.release.xcconfig */,
+				9DF43942FB7E7E2985666BA4 /* Pods-ClimbingTests.debug.xcconfig */,
+				B1AEAD32CF4247BFAC811F76 /* Pods-ClimbingTests.release.xcconfig */,
+				A09D5743B849AA1C041930E1 /* Pods-ClimbingUITests.debug.xcconfig */,
+				3D08C8DC15B169F7B1CE5EA6 /* Pods-ClimbingUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A684B78D1D701C4F0030FA1A /* M */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +167,8 @@
 				A6D34CAF1D5B1D3C006E3423 /* ClimbingTests */,
 				A6D34CBA1D5B1D3C006E3423 /* ClimbingUITests */,
 				A6D34C991D5B1D3C006E3423 /* Products */,
+				473B0A7EE060DE526B4A96C1 /* Pods */,
+				EC51580548271E3219538444 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,6 +191,7 @@
 				A6D34C9B1D5B1D3C006E3423 /* AppDelegate.swift */,
 				A6D34CA21D5B1D3C006E3423 /* Assets.xcassets */,
 				A6D34CA41D5B1D3C006E3423 /* LaunchScreen.storyboard */,
+				A6BF3F6C1D76789D00C4BEBE /* GoogleService-Info.plist */,
 				A6D34CA71D5B1D3C006E3423 /* Info.plist */,
 			);
 			path = Climbing;
@@ -182,6 +215,16 @@
 			path = ClimbingUITests;
 			sourceTree = "<group>";
 		};
+		EC51580548271E3219538444 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F3003985233E6E979B35332 /* Pods_Climbing.framework */,
+				1FC677D147DE87C4A55AA861 /* Pods_ClimbingTests.framework */,
+				9017AD3CF0F2EDBD0FBC2347 /* Pods_ClimbingUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -189,9 +232,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6D34CC01D5B1D3C006E3423 /* Build configuration list for PBXNativeTarget "Climbing" */;
 			buildPhases = (
+				E01B87A81075CEE01B271DD1 /* [CP] Check Pods Manifest.lock */,
 				A6D34C941D5B1D3C006E3423 /* Sources */,
 				A6D34C951D5B1D3C006E3423 /* Frameworks */,
 				A6D34C961D5B1D3C006E3423 /* Resources */,
+				251576EF68DF396AE93FFA33 /* [CP] Embed Pods Frameworks */,
+				BA4CEE37537E6CFB292F2028 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,9 +252,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6D34CC31D5B1D3C006E3423 /* Build configuration list for PBXNativeTarget "ClimbingTests" */;
 			buildPhases = (
+				824352E940384AC727169A9F /* [CP] Check Pods Manifest.lock */,
 				A6D34CA81D5B1D3C006E3423 /* Sources */,
 				A6D34CA91D5B1D3C006E3423 /* Frameworks */,
 				A6D34CAA1D5B1D3C006E3423 /* Resources */,
+				8087ED0E1E4E6F331F4E8730 /* [CP] Embed Pods Frameworks */,
+				9B5DBBF59E475E4DB6DA9EEA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,9 +273,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6D34CC61D5B1D3C006E3423 /* Build configuration list for PBXNativeTarget "ClimbingUITests" */;
 			buildPhases = (
+				41F0701C4AABCF7625301255 /* [CP] Check Pods Manifest.lock */,
 				A6D34CB31D5B1D3C006E3423 /* Sources */,
 				A6D34CB41D5B1D3C006E3423 /* Frameworks */,
 				A6D34CB51D5B1D3C006E3423 /* Resources */,
+				7ED7299F6C55ABCE8A00AC7B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -288,6 +339,7 @@
 			files = (
 				A6D34CA61D5B1D3C006E3423 /* LaunchScreen.storyboard in Resources */,
 				A684B7951D702A860030FA1A /* AddFieldView.xib in Resources */,
+				A6BF3F6D1D76789D00C4BEBE /* GoogleService-Info.plist in Resources */,
 				A6D34CA31D5B1D3C006E3423 /* Assets.xcassets in Resources */,
 				A6D34CA11D5B1D3C006E3423 /* Main.storyboard in Resources */,
 			);
@@ -308,6 +360,129 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		251576EF68DF396AE93FFA33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Climbing/Pods-Climbing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41F0701C4AABCF7625301255 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7ED7299F6C55ABCE8A00AC7B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClimbingUITests/Pods-ClimbingUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8087ED0E1E4E6F331F4E8730 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClimbingTests/Pods-ClimbingTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		824352E940384AC727169A9F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9B5DBBF59E475E4DB6DA9EEA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClimbingTests/Pods-ClimbingTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA4CEE37537E6CFB292F2028 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Climbing/Pods-Climbing-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E01B87A81075CEE01B271DD1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A6D34C941D5B1D3C006E3423 /* Sources */ = {
@@ -467,6 +642,7 @@
 		};
 		A6D34CC11D5B1D3C006E3423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBEEDE89F94DABB6CD200AD2 /* Pods-Climbing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Climbing/Info.plist;
@@ -478,6 +654,7 @@
 		};
 		A6D34CC21D5B1D3C006E3423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2223D28AB32B7A916D46F1D0 /* Pods-Climbing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Climbing/Info.plist;
@@ -489,6 +666,7 @@
 		};
 		A6D34CC41D5B1D3C006E3423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DF43942FB7E7E2985666BA4 /* Pods-ClimbingTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ClimbingTests/Info.plist;
@@ -501,6 +679,7 @@
 		};
 		A6D34CC51D5B1D3C006E3423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1AEAD32CF4247BFAC811F76 /* Pods-ClimbingTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ClimbingTests/Info.plist;
@@ -513,6 +692,7 @@
 		};
 		A6D34CC71D5B1D3C006E3423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A09D5743B849AA1C041930E1 /* Pods-ClimbingUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = ClimbingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -524,6 +704,7 @@
 		};
 		A6D34CC81D5B1D3C006E3423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D08C8DC15B169F7B1CE5EA6 /* Pods-ClimbingUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = ClimbingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

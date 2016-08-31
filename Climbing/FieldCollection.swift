@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class FieldCollection {
     static let shareInstance = FieldCollection()
@@ -18,6 +19,16 @@ class FieldCollection {
             let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
             self.userDefault.setValue(data, forKey: "currentField")
             self.userDefault.synchronize()
+            updateToFireBase()
+        }
+    }
+    
+    func updateToFireBase(){
+        let ref = FIRDatabase.database().reference()
+        for i in 0...FieldCollection.shareInstance.currentField.count-1 {
+            let childRef = ref.child("Trainer").child("Field").child("\(FieldCollection.shareInstance.currentField[i].fieldName!)")
+        let value = ["difficulty": ""]
+        childRef.setValue(value)
         }
     }
 }

@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
+import SwiftyJSON
+
 
 class FieldChoosingVC: UIViewController {
 
@@ -15,19 +17,7 @@ class FieldChoosingVC: UIViewController {
     let userDefault = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if self.userDefault.valueForKey("currentField") != nil {
-//            let data = self.userDefault.valueForKey("currentField") as! NSData
-//            FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
-//        }
-        let trainerRef = FIRDatabase.database().reference().child("Trainer")
-       
-        trainerRef.observeEventType(.Value, withBlock: { snapshot in
-            print(snapshot.value)
-            // need to convert JSON to models
-            }, withCancelBlock: { error in
-                print(error.description)
-        })
-        
+        getDataFromFireBase()
         self.navigationController?.navigationBarHidden = true
         
         self.fieldTableView.dataSource = self
@@ -64,6 +54,23 @@ class FieldChoosingVC: UIViewController {
     
     func closeView() {
         self.view.superview?.viewWithTag(0001)?.removeFromSuperview()
+    }
+    
+    func getDataFromFireBase() {
+        let trainerRef = FIRDatabase.database().reference().child("Trainer")
+        trainerRef.observeEventType(.Value, withBlock: { snapshot in
+            let json = JSON(snapshot.value!)
+            //for i in 0...snapshot.childrenCount {
+         let fieldName = json["new field"]
+            print(fieldName)
+            //}
+            
+    
+            print(json)
+            // need to convert JSON to models
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
     }
 
     

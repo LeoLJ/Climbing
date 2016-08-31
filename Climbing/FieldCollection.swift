@@ -16,9 +16,9 @@ class FieldCollection {
     var currentField = [FieldModel]() {
         didSet {
             NSNotificationCenter.defaultCenter().postNotificationName("reload:", object: nil)
-            let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
-            self.userDefault.setValue(data, forKey: "currentField")
-            self.userDefault.synchronize()
+//            let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
+//            self.userDefault.setValue(data, forKey: "currentField")
+//            self.userDefault.synchronize()
             updateToFireBase()
         }
     }

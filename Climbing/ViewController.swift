@@ -12,12 +12,14 @@ class ViewController: UIViewController {
     
     var index: Int?
     var tField: UITextField!
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.blackColor()
         super.viewDidLoad()
         //self.scoreLabel.text = String(TargetHouse.shareInstance.currentPoint)
-        
+        appDelegate.shouldRotate = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.refresh), name: "refresh:", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.deleteTarget), name: "deleteTarget:", object: nil)
@@ -55,6 +57,7 @@ class ViewController: UIViewController {
             }
             newRoute.center = currentCenter
             FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
+            FieldCollection.shareInstance.updateToFireBase()
             self.deleteTarget()
         }))
         self.presentViewController(alert, animated: true, completion: {
@@ -63,6 +66,7 @@ class ViewController: UIViewController {
 
         
     }
+    
     
     override func willMoveToParentViewController(parent: UIViewController?) {
         

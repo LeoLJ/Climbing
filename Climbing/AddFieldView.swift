@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class AddFieldView: UIView {
     
@@ -26,10 +27,19 @@ class AddFieldView: UIView {
 
     @IBAction func done(sender: AnyObject) {
         newField.fieldName = self.textField.text!
-        
         FieldCollection.shareInstance.currentField.append(newField)
+
+        let ref = FIRDatabase.database().reference()
+        let childRef = ref.child("Trainer").child("Field").childByAutoId().child(self.textField.text!)
+        let value = ["":""]
+        childRef.setValue(value)
+        
         NSNotificationCenter.defaultCenter().postNotificationName("closeView:", object: nil)
         
     }
+    /*
+ let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
+ self.userDefault.setValue(data, forKey: "currentField")
+ self.userDefault.synchronize()*/
 
 }

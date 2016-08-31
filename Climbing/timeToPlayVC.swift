@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class timeToPlayVC: UIViewController {
     var fieldIndex: Int?
@@ -186,6 +187,12 @@ extension timeToPlayVC {
                 newHolder.time = self.timeLabel.text
                 newHolder.mode = self.mode
                 FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
+//                let ref = FIRDatabase.database().reference()
+//                for i in 0...FieldCollection.shareInstance.currentField.count-1 {
+//                    let childRef = ref.child("Trainer").child("Field").child("\(FieldCollection.shareInstance.currentField[i].fieldName!)")
+//                    let value = ["difficulty": ""]
+//                    childRef.setValue(value)
+//                }
                 self.performSegueWithIdentifier("charts", sender: nil)
             }))
             self.presentViewController(nameAlert, animated: true, completion: {

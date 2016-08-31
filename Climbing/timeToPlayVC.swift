@@ -186,6 +186,7 @@ extension timeToPlayVC {
                 newHolder.time = self.timeLabel.text
                 newHolder.mode = self.mode
                 FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
+                FieldCollection.shareInstance.updateToFireBase()
                 self.performSegueWithIdentifier("charts", sender: nil)
             }))
             self.presentViewController(nameAlert, animated: true, completion: {

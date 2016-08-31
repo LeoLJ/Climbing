@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FieldChoosingVC: UIViewController {
 
@@ -14,10 +15,19 @@ class FieldChoosingVC: UIViewController {
     let userDefault = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
-        if self.userDefault.valueForKey("currentField") != nil {
-            let data = self.userDefault.valueForKey("currentField") as! NSData
-            FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
-        }
+//        if self.userDefault.valueForKey("currentField") != nil {
+//            let data = self.userDefault.valueForKey("currentField") as! NSData
+//            FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
+//        }
+        let trainerRef = FIRDatabase.database().reference().child("Trainer")
+       
+        trainerRef.observeEventType(.Value, withBlock: { snapshot in
+            print(snapshot.value)
+            // need to convert JSON to models
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+        
         self.navigationController?.navigationBarHidden = true
         
         self.fieldTableView.dataSource = self

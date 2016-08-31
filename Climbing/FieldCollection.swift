@@ -25,10 +25,35 @@ class FieldCollection {
     
     func updateToFireBase(){
         let ref = FIRDatabase.database().reference()
-        for i in 0...FieldCollection.shareInstance.currentField.count-1 {
-            let childRef = ref.child("Trainer").child("Field").child("\(FieldCollection.shareInstance.currentField[i].fieldName!)")
-        let value = ["difficulty": ""]
-        childRef.setValue(value)
+        for fieldmodel in FieldCollection.shareInstance.currentField {
+            let childRef = ref.child("Trainer").child("\(fieldmodel.fieldName!)")
+            if fieldmodel.challangeRoute.count > 0 {
+               for (index, route) in fieldmodel.challangeRoute.enumerate() {
+                let routeRef = childRef.child("Route\(index + 1)")
+                    if route.rankList.count > 0 {
+                        var rankArray = [Dictionary<String, String>]()
+                        for rank in route.rankList {
+                            let rankDict = ["name" : rank.name!,
+                                            "time" : rank.time!,
+                                            "mode" : rank.mode!]
+                            rankArray.append(rankDict)
+                        }
+                        let value = ["difficulty" : "\(route.difficulty!)",
+                                     "center" : route.center!,
+                                     "rankList" : rankArray]
+                        routeRef.setValue(value)
+                    }else{
+                        for route in fieldmodel.challangeRoute {
+                            if route.rankList.count > 0 {
+                                let value = ["difficulty" : "\(route.difficulty!)",
+                                             "center" : route.center!]
+                                routeRef.setValue(value)
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
+    
 }

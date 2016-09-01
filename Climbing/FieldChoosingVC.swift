@@ -9,6 +9,7 @@
 import UIKit
 
 class FieldChoosingVC: UIViewController {
+    var tField: UITextField!
 
     @IBOutlet weak var fieldTableView: UITableView!
     let userDefault = NSUserDefaults.standardUserDefaults()
@@ -31,21 +32,40 @@ class FieldChoosingVC: UIViewController {
     }
     
     @IBAction func addField(sender: AnyObject) {
-        if view.superview!.viewWithTag(0001) == nil {
-            let addView = NSBundle.mainBundle().loadNibNamed("AddFieldView", owner: nil, options: nil)[0] as! AddFieldView
-            addView.center =  CGPoint(x: self.view.center.x, y: self.view.center.y)
-            addView.transform = CGAffineTransformMakeScale(0, 0)
-            UIView.animateWithDuration(0.3, animations: {
-                addView.transform = CGAffineTransformIdentity
-            })
-            addView.tag = 0001
+//        if view.superview!.viewWithTag(0001) == nil {
+//            let addView = NSBundle.mainBundle().loadNibNamed("AddFieldView", owner: nil, options: nil)[0] as! AddFieldView
+//            addView.center =  CGPoint(x: self.view.center.x, y: self.view.center.y)
+//            addView.transform = CGAffineTransformMakeScale(0, 0)
+//            UIView.animateWithDuration(0.3, animations: {
+//                addView.transform = CGAffineTransformIdentity
+//            })
+//            addView.tag = 0001
+//            
+//            addView.layer.masksToBounds = false;
+//            addView.layer.shadowOffset = CGSizeMake(3, 3);
+//            addView.layer.shadowRadius = 10;
+//            addView.layer.shadowOpacity = 0.5;
+//            self.view.superview?.addSubview(addView)
+//        }
+        
+        let alert = UIAlertController(title: "Give it a name", message: "", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler(configurationTextField)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
+            let newField = FieldModel(fieldName: nil, challangeRoute: [])
+            newField.fieldName = self.tField.text!
+            FieldCollection.shareInstance.currentField.append(newField)
+            FieldCollection.shareInstance.updateToDefault()
+        }))
+        self.presentViewController(alert, animated: true, completion: {
             
-            addView.layer.masksToBounds = false;
-            addView.layer.shadowOffset = CGSizeMake(3, 3);
-            addView.layer.shadowRadius = 10;
-            addView.layer.shadowOpacity = 0.5;
-            self.view.superview?.addSubview(addView)
-        }
+        })
+    }
+    
+    func configurationTextField(textField: UITextField!)
+    {
+        textField.placeholder = "Give it a name"
+        tField = textField
     }
     
     func reload() {

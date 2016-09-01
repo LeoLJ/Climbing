@@ -24,7 +24,6 @@ class timeToPlayVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(timeToPlayVC.tapBubbleOnce), name: "tapBubbleOnce:", object: nil)
         rankLabel.text = FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty
         if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count != 0 {
         displayAll()
@@ -33,6 +32,11 @@ class timeToPlayVC: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.view.layoutIfNeeded()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(timeToPlayVC.tapBubbleOnce), name: "tapBubbleOnce:", object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "tapBubbleOnce:", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +60,8 @@ class timeToPlayVC: UIViewController {
     override func willMoveToParentViewController(parent: UIViewController?) {
         if parent == nil {
             TargetHouse.shareInstance.currentTargets.removeAll()
-        }
+            //clickTime = 1
+                }
     }
     
     func creatTarget(i:Int) {

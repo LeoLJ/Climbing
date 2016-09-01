@@ -38,11 +38,18 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
     
     
     let mainView = UIApplication.sharedApplication().keyWindow?.superview
+    let mainFrame = UIApplication.sharedApplication().keyWindow?.bounds
     
     func dragTarget(recognizer: UIPanGestureRecognizer) {
         let point = recognizer.locationInView(mainView);
+        if point.y < (mainFrame?.minY)! + 30 || point.x > (mainFrame?.maxX)! - 20 || point.x < (mainFrame?.minX)! + 35 {
+//                let newframe = CGRectMake(point.x, point.y, 60, 60)
+//                image.frame = newframe
+            print(point)
+        }else{
         image.center.x = point.x
         image.center.y = point.y
+        }
     }
     
     

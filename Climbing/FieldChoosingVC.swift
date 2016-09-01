@@ -90,6 +90,8 @@ extension FieldChoosingVC: UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             FieldCollection.shareInstance.currentField.removeAtIndex(indexPath.row)
+            FieldCollection.shareInstance.updateToDefault()
+            reload()
         }
     }
 }

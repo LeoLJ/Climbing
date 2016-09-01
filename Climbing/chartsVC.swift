@@ -33,6 +33,19 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList.sortInPlace({ $0.time < $1.time })
     }
     
+    override func willMoveToParentViewController(parent: UIViewController?) {
+        if parent == nil {
+            if let navigationController = self.navigationController {
+                var viewControllers = navigationController.viewControllers
+                let viewControllersCount = viewControllers.count
+                if (viewControllersCount > 2) {
+                    viewControllers.removeAtIndex(viewControllersCount - 2)
+                    navigationController.setViewControllers(viewControllers, animated:false)
+                }
+            }        }
+    }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("chartsCell",forIndexPath: indexPath) as! MyCustomCell
         cell.leftLabel.text = FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList[indexPath.row].name
@@ -52,6 +65,7 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList.removeAtIndex(indexPath.row)
+            FieldCollection.shareInstance.updateToDefault()
             self.chartsTableView.reloadData()
         }
     }

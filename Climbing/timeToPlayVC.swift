@@ -30,6 +30,10 @@ class timeToPlayVC: UIViewController {
         displayAll()
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.view.layoutIfNeeded()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -100,7 +100,6 @@ class ViewController: UIViewController {
     func configurationTextField(textField: UITextField!)
     {
         textField.placeholder = "Enter a rank"
-        textField.keyboardType = .NumberPad
         tField = textField
     }
     

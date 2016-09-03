@@ -17,6 +17,9 @@ class timeToPlayVC: UIViewController {
     var startTime = NSTimeInterval()
     var timer = NSTimer()
     var tField: UITextField!
+    var randomNumArr = [Int]()
+    var indexArray = [Int]()
+    var targetNum: Int?
 
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -54,6 +57,8 @@ class timeToPlayVC: UIViewController {
                 
             }else if mode == "Random" {
                 creatTarget(0)
+            }else if mode == "Random-EX" {
+                creatTarget(0)
         }
     }
     
@@ -88,6 +93,24 @@ class timeToPlayVC: UIViewController {
         case "Random"?:
             if clickTime < FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count  {
                 if clickTime == 1 {
+                    generateNumberFrom(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count)
+                    start()
+                }
+                let newTarget = TargetFactory().createTarget("\(clickTime)")
+                newTarget.image.tag = Int(newTarget.id!)
+                //newTarget.image.center = CGPoint.randomPoint.random(0...Int(self.view.bounds.maxX), rangeY:0...Int(self.view.bounds.maxY))
+                let i = randomNumArr[clickTime - 1]
+                newTarget.image.center = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
+                TargetHouse.shareInstance.currentTargets.append(newTarget)
+                view.addSubview(newTarget.image)
+                clickTime += 1
+            }else if clickTime == FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count {
+                stop()
+                record()
+            }
+        case "Random-EX"?:
+            if clickTime < targetNum  {
+                if clickTime == 1 {
                     start()
                 }
                 let newTarget = TargetFactory().createTarget("\(clickTime)")
@@ -96,7 +119,7 @@ class timeToPlayVC: UIViewController {
                 TargetHouse.shareInstance.currentTargets.append(newTarget)
                 view.addSubview(newTarget.image)
                 clickTime += 1
-            }else if clickTime == FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count {
+            }else if clickTime == targetNum {
                 stop()
                 record()
             }
@@ -112,6 +135,22 @@ class timeToPlayVC: UIViewController {
             clickTime += 1
         default: break
         }
+    }
+    
+    func generateNumberFrom(count: Int) -> [Int] {
+        
+        indexArray.removeAll()
+        for i in 1...count - 1 {
+            indexArray.append(i)
+        }
+        randomNumArr.removeAll()
+        for _ in 0...count - 2 {
+            let arrayIndex = Int(arc4random_uniform(UInt32(indexArray.count)))
+            let arrayNum = indexArray[arrayIndex]
+            randomNumArr.append(arrayNum)
+            indexArray.removeAtIndex(arrayIndex)
+        }
+        return randomNumArr
     }
     
     

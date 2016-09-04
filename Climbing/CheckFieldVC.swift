@@ -80,7 +80,7 @@ extension CheckFieldVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("difficultyCell",forIndexPath: indexPath)
         //if FieldCollection.shareInstance.currentField[index!].challangeRoute != nil {
-        cell.textLabel?.text = FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].difficulty
+        cell.textLabel?.text = "Rank:\(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].difficulty!)"
         //}
         return cell
     }

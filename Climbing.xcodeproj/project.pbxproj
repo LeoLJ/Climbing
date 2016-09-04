@@ -12,8 +12,6 @@
 		9C8410C5CA5A3F3047E4343B /* Pods_ClimbingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FC677D147DE87C4A55AA861 /* Pods_ClimbingTests.framework */; };
 		A684B7911D701D5A0030FA1A /* FieldChoosingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B7901D701D5A0030FA1A /* FieldChoosingVC.swift */; };
 		A684B7931D701F090030FA1A /* FieldCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B7921D701F090030FA1A /* FieldCollection.swift */; };
-		A684B7951D702A860030FA1A /* AddFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A684B7941D702A860030FA1A /* AddFieldView.xib */; };
-		A684B7971D702A9D0030FA1A /* AddFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B7961D702A9D0030FA1A /* AddFieldView.swift */; };
 		A684B7991D7045810030FA1A /* CheckFieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B7981D7045810030FA1A /* CheckFieldVC.swift */; };
 		A684B79D1D7062260030FA1A /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B79C1D7062260030FA1A /* FieldModel.swift */; };
 		A684B79F1D7185C10030FA1A /* timeToPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684B79E1D7185C10030FA1A /* timeToPlayVC.swift */; };
@@ -58,8 +56,6 @@
 		A09D5743B849AA1C041930E1 /* Pods-ClimbingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimbingUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClimbingUITests/Pods-ClimbingUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A684B7901D701D5A0030FA1A /* FieldChoosingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldChoosingVC.swift; sourceTree = "<group>"; };
 		A684B7921D701F090030FA1A /* FieldCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollection.swift; sourceTree = "<group>"; };
-		A684B7941D702A860030FA1A /* AddFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFieldView.xib; sourceTree = "<group>"; };
-		A684B7961D702A9D0030FA1A /* AddFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFieldView.swift; sourceTree = "<group>"; };
 		A684B7981D7045810030FA1A /* CheckFieldVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckFieldVC.swift; sourceTree = "<group>"; };
 		A684B79C1D7062260030FA1A /* FieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
 		A684B79E1D7185C10030FA1A /* timeToPlayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeToPlayVC.swift; sourceTree = "<group>"; };
@@ -142,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				A6D34C9F1D5B1D3C006E3423 /* Main.storyboard */,
-				A684B7941D702A860030FA1A /* AddFieldView.xib */,
 			);
 			name = V;
 			sourceTree = "<group>";
@@ -152,7 +147,6 @@
 			children = (
 				A6D34C9D1D5B1D3C006E3423 /* ViewController.swift */,
 				A684B7901D701D5A0030FA1A /* FieldChoosingVC.swift */,
-				A684B7961D702A9D0030FA1A /* AddFieldView.swift */,
 				A684B7981D7045810030FA1A /* CheckFieldVC.swift */,
 				A684B79E1D7185C10030FA1A /* timeToPlayVC.swift */,
 				A699E2381D74531700C58121 /* chartsVC.swift */,
@@ -338,7 +332,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D34CA61D5B1D3C006E3423 /* LaunchScreen.storyboard in Resources */,
-				A684B7951D702A860030FA1A /* AddFieldView.xib in Resources */,
 				A6BF3F6D1D76789D00C4BEBE /* GoogleService-Info.plist in Resources */,
 				A6D34CA31D5B1D3C006E3423 /* Assets.xcassets in Resources */,
 				A6D34CA11D5B1D3C006E3423 /* Main.storyboard in Resources */,
@@ -498,7 +491,6 @@
 				A684B79F1D7185C10030FA1A /* timeToPlayVC.swift in Sources */,
 				A684B7931D701F090030FA1A /* FieldCollection.swift in Sources */,
 				A684B7991D7045810030FA1A /* CheckFieldVC.swift in Sources */,
-				A684B7971D702A9D0030FA1A /* AddFieldView.swift in Sources */,
 				A6D34C9C1D5B1D3C006E3423 /* AppDelegate.swift in Sources */,
 				A684B7911D701D5A0030FA1A /* FieldChoosingVC.swift in Sources */,
 			);

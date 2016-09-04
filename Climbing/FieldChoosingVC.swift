@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import FirebaseDatabase
 class FieldChoosingVC: UIViewController {
     var tField: UITextField!
 
@@ -23,7 +23,6 @@ class FieldChoosingVC: UIViewController {
         
         self.fieldTableView.dataSource = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FieldChoosingVC.reload), name: "reload:", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FieldChoosingVC.closeView), name: "closeView:", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,21 +31,6 @@ class FieldChoosingVC: UIViewController {
     }
     
     @IBAction func addField(sender: AnyObject) {
-//        if view.superview!.viewWithTag(0001) == nil {
-//            let addView = NSBundle.mainBundle().loadNibNamed("AddFieldView", owner: nil, options: nil)[0] as! AddFieldView
-//            addView.center =  CGPoint(x: self.view.center.x, y: self.view.center.y)
-//            addView.transform = CGAffineTransformMakeScale(0, 0)
-//            UIView.animateWithDuration(0.3, animations: {
-//                addView.transform = CGAffineTransformIdentity
-//            })
-//            addView.tag = 0001
-//            
-//            addView.layer.masksToBounds = false;
-//            addView.layer.shadowOffset = CGSizeMake(3, 3);
-//            addView.layer.shadowRadius = 10;
-//            addView.layer.shadowOpacity = 0.5;
-//            self.view.superview?.addSubview(addView)
-//        }
         
         let alert = UIAlertController(title: "Give it a name", message: "", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
@@ -56,6 +40,13 @@ class FieldChoosingVC: UIViewController {
             newField.fieldName = self.tField.text!
             FieldCollection.shareInstance.currentField.append(newField)
             FieldCollection.shareInstance.updateToDefault()
+
+            let ref = FIRDatabase.database().reference()
+            let childRef = ref.child("Trainer").child("Field")
+            let value = ["\(FieldCollection.shareInstance.numbers)":self.tField.text!]
+            childRef.updateChildValues(value)
+            FieldCollection.shareInstance.numbers += 1
+
         }))
         self.presentViewController(alert, animated: true, completion: {
             
@@ -71,12 +62,7 @@ class FieldChoosingVC: UIViewController {
     func reload() {
         self.fieldTableView.reloadData()
     }
-    
-    func closeView() {
-        self.view.superview?.viewWithTag(0001)?.removeFromSuperview()
-    }
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

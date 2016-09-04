@@ -11,21 +11,12 @@ import UIKit
 class FieldCollection {
     static let shareInstance = FieldCollection()
     let userDefault = NSUserDefaults.standardUserDefaults()
-
+    var numbers: Int = 0
     var currentField = [FieldModel]() {
         didSet {
             NSNotificationCenter.defaultCenter().postNotificationName("reload:", object: nil)
         }
     }
-    
-//    func updateToFireBase(){
-//        let ref = FIRDatabase.database().reference()
-//        for i in 0...FieldCollection.shareInstance.currentField.count-1 {
-//            let childRef = ref.child("Trainer").child("Field").child("\(FieldCollection.shareInstance.currentField[i].fieldName!)")
-//        let value = ["difficulty": ""]
-//        childRef.setValue(value)
-//        }
-//    }
     
     func updateToDefault() {
         

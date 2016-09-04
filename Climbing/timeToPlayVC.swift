@@ -27,7 +27,7 @@ class timeToPlayVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
-        rankLabel.text = FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty
+        rankLabel.text = "Rank:\(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!)"
         if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count != 0 {
         displayAll()
         }
@@ -236,12 +236,12 @@ extension timeToPlayVC {
                 newHolder.mode = self.mode
                 FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
                 FieldCollection.shareInstance.updateToDefault()
-//                let ref = FIRDatabase.database().reference()
-//                for i in 0...FieldCollection.shareInstance.currentField.count-1 {
-//                    let childRef = ref.child("Trainer").child("Field").child("\(FieldCollection.shareInstance.currentField[i].fieldName!)")
-//                    let value = ["difficulty": ""]
-//                    childRef.setValue(value)
-//                }
+                
+                let ref = FIRDatabase.database().reference()
+                let childRef = ref.child("Trainer").child("Charts").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].fieldName!)").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].difficulty!)")
+                let value = ["Name" : self.tField.text!, "Time" : self.timeLabel.text!, "Mode" : self.mode!]
+                childRef.updateChildValues(value)
+                
                 self.performSegueWithIdentifier("charts", sender: nil)
             }))
             self.presentViewController(nameAlert, animated: true, completion: {

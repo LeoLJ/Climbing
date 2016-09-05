@@ -29,12 +29,15 @@ class FieldCollection {
     
     func getAllFromFirebase() {
         
-        ref.child("Trainer").child("Path").observeSingleEventOfType(.Value, withBlock: { snapshot in
-            if let data = snapshot.value {
-                //let json = JSON(data)
-                //let Field = json["Trainer"]["Field"][1].string
-                //let Route = json["Trainer"]["Route"][1][self.ref.key]["ID"].string
-                print(data)
+        let newField = FieldModel(fieldName: nil, challangeRoute: [])
+        
+        ref.child("Trainer").child("Field").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                let name = childSnapshot.value! as! String
+                newField.fieldName = name
+                FieldCollection.shareInstance.currentField.append(newField)
+                print(name)
             }
             }, withCancelBlock: { error in
                 print(error.description)

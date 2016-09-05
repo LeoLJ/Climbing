@@ -15,6 +15,7 @@ class FieldChoosingVC: UIViewController {
     let userDefault = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
+        FieldCollection.shareInstance.getAllFromFirebase()
         if self.userDefault.valueForKey("currentField") != nil {
             let data = self.userDefault.valueForKey("currentField") as! NSData
             FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]

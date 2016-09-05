@@ -26,26 +26,9 @@ class ViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.deleteTarget), name: "deleteTarget:", object: nil)
         // Do any additional setup after loading the view, typically from a nib.
-        
-//        UIDevice.currentDevice().setValue(UIInterfaceOrientation.LandscapeLeft.rawValue, forKey: "orientation")
 
     }
     
-//    override func shouldAutorotate() -> Bool {
-//        // Lock autorotate
-//        return false
-//    }
-//    
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        // Only allow Landscape
-//        return UIInterfaceOrientationMask.LandscapeLeft
-//    }
-//    
-//    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-//        
-//        // Only allow Portrait
-//        return UIInterfaceOrientation.LandscapeLeft
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

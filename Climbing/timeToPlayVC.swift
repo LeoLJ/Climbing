@@ -20,6 +20,9 @@ class timeToPlayVC: UIViewController {
     var randomNumArr = [Int]()
     var indexArray = [Int]()
     var targetNum: Int?
+    var currentCenter = [String]()
+    let ref = FIRDatabase.database().reference()
+
 
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -28,7 +31,9 @@ class timeToPlayVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
         rankLabel.text = "Rank:\(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!)"
-        if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count != 0 {
+        if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center == nil {
+        getPathFromFirebase()
+        }else {
         displayAll()
         }
     }
@@ -154,6 +159,41 @@ class timeToPlayVC: UIViewController {
     }
     
     
+    // Get Path data form firebase
+    func getPathFromFirebase() {
+        ref.child("Trainer").child("Path").child(FieldCollection.shareInstance.currentField[fieldIndex!].fieldName!).child(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                let name = childSnapshot.value! as? String
+                self.currentCenter.append(name!)
+            }
+            FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].center = self.currentCenter
+            if FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].center!.count != 0 {
+                self.displayAll()
+            }
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+    }
+    
+    // Get Chart data form firebase
+    func getChartFromFirebase() {
+        ref.child("Trainer").child("Charts").child(FieldCollection.shareInstance.currentField[fieldIndex!].fieldName!).child(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let players = RankList(name: nil, time: nil, mode: nil)
+                let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                players.name = childSnapshot.value!.objectForKey("Name") as? String
+                players.mode = childSnapshot.value!.objectForKey("Mode") as? String
+                players.time = childSnapshot.value!.objectForKey("Time") as? String
+                FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(players)
+                print(players)
+            }
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -226,22 +266,22 @@ extension timeToPlayVC {
         }))
         
         alert.addAction(UIAlertAction(title: "Record", style: .Default, handler:{ _ in
-            let newHolder = RankList(name: nil, time: nil, mode: nil)
+            //let newHolder = RankList(name: nil, time: nil, mode: nil)
             let nameAlert = UIAlertController(title: "Give A Name", message: "", preferredStyle: .Alert)
             nameAlert.addTextFieldWithConfigurationHandler(self.configurationTextField)
             nameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
             nameAlert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
-                newHolder.name = self.tField.text
-                newHolder.time = self.timeLabel.text
-                newHolder.mode = self.mode
-                FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
-                FieldCollection.shareInstance.updateToDefault()
+//                newHolder.name = self.tField.text
+//                newHolder.time = self.timeLabel.text
+//                newHolder.mode = self.mode
+                //FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
+                //FieldCollection.shareInstance.updateToDefault()
                 
                 let ref = FIRDatabase.database().reference()
-                let childRef = ref.child("Trainer").child("Charts").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].fieldName!)").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].difficulty!)")
+                let childRef = ref.child("Trainer").child("Charts").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].fieldName!)").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].difficulty!)").childByAutoId()
                 let value = ["Name" : self.tField.text!, "Time" : self.timeLabel.text!, "Mode" : self.mode!]
                 childRef.updateChildValues(value)
-                
+                self.getChartFromFirebase()
                 self.performSegueWithIdentifier("charts", sender: nil)
             }))
             self.presentViewController(nameAlert, animated: true, completion: {

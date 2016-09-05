@@ -71,7 +71,7 @@ class ViewController: UIViewController {
             }
             newRoute.center = currentCenter
             FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
-            FieldCollection.shareInstance.updateToDefault()
+            //FieldCollection.shareInstance.updateToDefault()
             self.deleteTarget()
             self.i = 0
         }))

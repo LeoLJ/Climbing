@@ -18,10 +18,13 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.chartsTableView.dataSource = self
-        self.chartsTableView.reloadData()
         self.chartsTableView.allowsSelection = false
         // Do any additional setup after loading the view.
         sortArray()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.chartsTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

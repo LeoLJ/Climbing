@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class CheckFieldVC: UIViewController {
     var index: Int?
     var tField: UITextField!
     var targetNum: Int?
+    let ref = FIRDatabase.database().reference()
 
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -34,6 +36,7 @@ class CheckFieldVC: UIViewController {
         self.navigationController?.navigationBar.translucent = true
         
         self.titleLabel.text = FieldCollection.shareInstance.currentField[index!].fieldName
+        getRouteFromFirebase()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +54,22 @@ class CheckFieldVC: UIViewController {
         self.difficultyTableView.reloadData()
     }
     
-
+    // Get Route data form firebase
+    func getRouteFromFirebase() {
+        ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[index!].fieldName!).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                let name = childSnapshot.value!.objectForKey("ID") as? String
+                let newRoute = Route(difficulty: nil, center: nil, rankList: [])
+                newRoute.difficulty = name
+                FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
+                self.difficultyTableView.reloadData()
+                print(name)
+            }
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+    }
     
     // MARK: - Navigation
 

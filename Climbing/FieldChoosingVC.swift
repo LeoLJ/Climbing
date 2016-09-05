@@ -15,7 +15,9 @@ class FieldChoosingVC: UIViewController {
     let userDefault = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
-        FieldCollection.shareInstance.getAllFromFirebase()
+        if FieldCollection.shareInstance.currentField.count == 0 {
+        FieldCollection.shareInstance.getFieldFromFirebase()
+        }
         if self.userDefault.valueForKey("currentField") != nil {
             let data = self.userDefault.valueForKey("currentField") as! NSData
             FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
@@ -40,14 +42,15 @@ class FieldChoosingVC: UIViewController {
             let newField = FieldModel(fieldName: nil, challangeRoute: [])
             newField.fieldName = self.tField.text!
             FieldCollection.shareInstance.currentField.append(newField)
-            FieldCollection.shareInstance.updateToDefault()
+            //FieldCollection.shareInstance.updateToDefault()
 
             let ref = FIRDatabase.database().reference()
-            let childRef = ref.child("Trainer").child("Field")
-            let value = ["\(FieldCollection.shareInstance.numbers)":self.tField.text!]
+            let childRef = ref.child("Trainer").child("Field").childByAutoId()
+            //let value = ["\(FieldCollection.shareInstance.numbers)":self.tField.text!]
+            let value = ["FieldName":self.tField.text!]
             childRef.updateChildValues(value)
             FieldCollection.shareInstance.numbers += 1
-
+            FieldCollection.shareInstance.getNewFieldFromFirebase()
         }))
         self.presentViewController(alert, animated: true, completion: {
             

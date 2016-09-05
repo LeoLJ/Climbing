@@ -27,22 +27,32 @@ class FieldCollection {
          self.userDefault.synchronize()
     }
     
-    func getAllFromFirebase() {
-        
-        let newField = FieldModel(fieldName: nil, challangeRoute: [])
-        
+    func getFieldFromFirebase() {
         ref.child("Trainer").child("Field").observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
                 let childSnapshot = snapshot.childSnapshotForPath(child.key)
-                let name = childSnapshot.value! as! String
+                let name = childSnapshot.value!.objectForKey("FieldName") as? String
+                let newField = FieldModel(fieldName: nil, challangeRoute: [])
                 newField.fieldName = name
                 FieldCollection.shareInstance.currentField.append(newField)
-                print(name)
             }
             }, withCancelBlock: { error in
                 print(error.description)
         })
-        
+    }
+    
+    func getNewFieldFromFirebase() {
+        ref.child("Trainer").child("Field").observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
+            
+                let childSnapshot = snapshot.childSnapshotForPath(snapshot.key)
+                let name = childSnapshot.value!//.objectForKey("FieldName") //as? String
+//                let newField = FieldModel(fieldName: nil, challangeRoute: [])
+//                newField.fieldName = name
+//                FieldCollection.shareInstance.currentField.append(newField)
+                print(snapshot)
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
     }
     
     

@@ -266,16 +266,10 @@ extension timeToPlayVC {
         }))
         
         alert.addAction(UIAlertAction(title: "Record", style: .Default, handler:{ _ in
-            //let newHolder = RankList(name: nil, time: nil, mode: nil)
             let nameAlert = UIAlertController(title: "Give A Name", message: "", preferredStyle: .Alert)
             nameAlert.addTextFieldWithConfigurationHandler(self.configurationTextField)
             nameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
             nameAlert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
-//                newHolder.name = self.tField.text
-//                newHolder.time = self.timeLabel.text
-//                newHolder.mode = self.mode
-                //FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
-                //FieldCollection.shareInstance.updateToDefault()
                 
                 let ref = FIRDatabase.database().reference()
                 let childRef = ref.child("Trainer").child("Charts").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].fieldName!)").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].difficulty!)").childByAutoId()

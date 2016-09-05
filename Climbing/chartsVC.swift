@@ -68,7 +68,7 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList.removeAtIndex(indexPath.row)
-            FieldCollection.shareInstance.updateToDefault()
+            //FieldCollection.shareInstance.updateToDefault()
             self.chartsTableView.reloadData()
         }
     }

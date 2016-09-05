@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class FieldCollection {
     static let shareInstance = FieldCollection()
-    let userDefault = NSUserDefaults.standardUserDefaults()
+//    let userDefault = NSUserDefaults.standardUserDefaults()
     let ref = FIRDatabase.database().reference()
     var numbers: Int = 0
     var currentField = [FieldModel]() {
@@ -21,11 +21,11 @@ class FieldCollection {
         }
     }
     
-    func updateToDefault() {
-         let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
-         self.userDefault.setValue(data, forKey: "currentField")
-         self.userDefault.synchronize()
-    }
+//    func updateToDefault() {
+//         let data = NSKeyedArchiver.archivedDataWithRootObject(FieldCollection.shareInstance.currentField)
+//         self.userDefault.setValue(data, forKey: "currentField")
+//         self.userDefault.synchronize()
+//    }
     
     func getFieldFromFirebase() {
         ref.child("Trainer").child("Field").observeSingleEventOfType(.Value, withBlock: { snapshot in

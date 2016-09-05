@@ -117,7 +117,7 @@ extension CheckFieldVC: UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             FieldCollection.shareInstance.currentField[index!].challangeRoute.removeAtIndex(indexPath.row)
-            FieldCollection.shareInstance.updateToDefault()
+//            FieldCollection.shareInstance.updateToDefault()
             self.difficultyTableView.reloadData()
         }
     }

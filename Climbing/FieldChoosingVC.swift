@@ -12,16 +12,16 @@ class FieldChoosingVC: UIViewController {
     var tField: UITextField!
 
     @IBOutlet weak var fieldTableView: UITableView!
-    let userDefault = NSUserDefaults.standardUserDefaults()
+//    let userDefault = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
         if FieldCollection.shareInstance.currentField.count == 0 {
         FieldCollection.shareInstance.getFieldFromFirebase()
         }
-        if self.userDefault.valueForKey("currentField") != nil {
-            let data = self.userDefault.valueForKey("currentField") as! NSData
-            FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
-        }
+//        if self.userDefault.valueForKey("currentField") != nil {
+//            let data = self.userDefault.valueForKey("currentField") as! NSData
+//            FieldCollection.shareInstance.currentField = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [FieldModel]
+//        }
         self.navigationController?.navigationBarHidden = true
         
         self.fieldTableView.dataSource = self
@@ -39,18 +39,13 @@ class FieldChoosingVC: UIViewController {
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
         alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
-            let newField = FieldModel(fieldName: nil, challangeRoute: [])
-            newField.fieldName = self.tField.text!
-            FieldCollection.shareInstance.currentField.append(newField)
-            //FieldCollection.shareInstance.updateToDefault()
 
             let ref = FIRDatabase.database().reference()
             let childRef = ref.child("Trainer").child("Field").childByAutoId()
-            //let value = ["\(FieldCollection.shareInstance.numbers)":self.tField.text!]
             let value = ["FieldName":self.tField.text!]
             childRef.updateChildValues(value)
-            FieldCollection.shareInstance.numbers += 1
-            FieldCollection.shareInstance.getNewFieldFromFirebase()
+            //FieldCollection.shareInstance.numbers += 1
+            //FieldCollection.shareInstance.getNewFieldFromFirebase()
         }))
         self.presentViewController(alert, animated: true, completion: {
             
@@ -100,7 +95,7 @@ extension FieldChoosingVC: UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             FieldCollection.shareInstance.currentField.removeAtIndex(indexPath.row)
-            FieldCollection.shareInstance.updateToDefault()
+//            FieldCollection.shareInstance.updateToDefault()
             reload()
         }
     }

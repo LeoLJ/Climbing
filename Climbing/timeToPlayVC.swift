@@ -17,6 +17,9 @@ class timeToPlayVC: UIViewController {
     var startTime = NSTimeInterval()
     var timer = NSTimer()
     var tField: UITextField!
+    var randomNumArr = [Int]()
+    var indexArray = [Int]()
+    var targetNum: Int?
 
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -24,7 +27,7 @@ class timeToPlayVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
-        rankLabel.text = FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty
+        rankLabel.text = "Rank:\(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!)"
         if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count != 0 {
         displayAll()
         }
@@ -53,6 +56,8 @@ class timeToPlayVC: UIViewController {
                 creatTarget(0)
                 
             }else if mode == "Random" {
+                creatTarget(0)
+            }else if mode == "Random-EX" {
                 creatTarget(0)
         }
     }
@@ -88,6 +93,24 @@ class timeToPlayVC: UIViewController {
         case "Random"?:
             if clickTime < FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count  {
                 if clickTime == 1 {
+                    generateNumberFrom(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count)
+                    start()
+                }
+                let newTarget = TargetFactory().createTarget("\(clickTime)")
+                newTarget.image.tag = Int(newTarget.id!)
+                //newTarget.image.center = CGPoint.randomPoint.random(0...Int(self.view.bounds.maxX), rangeY:0...Int(self.view.bounds.maxY))
+                let i = randomNumArr[clickTime - 1]
+                newTarget.image.center = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
+                TargetHouse.shareInstance.currentTargets.append(newTarget)
+                view.addSubview(newTarget.image)
+                clickTime += 1
+            }else if clickTime == FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count {
+                stop()
+                record()
+            }
+        case "Random-EX"?:
+            if clickTime < targetNum  {
+                if clickTime == 1 {
                     start()
                 }
                 let newTarget = TargetFactory().createTarget("\(clickTime)")
@@ -96,7 +119,7 @@ class timeToPlayVC: UIViewController {
                 TargetHouse.shareInstance.currentTargets.append(newTarget)
                 view.addSubview(newTarget.image)
                 clickTime += 1
-            }else if clickTime == FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count {
+            }else if clickTime == targetNum {
                 stop()
                 record()
             }
@@ -112,6 +135,22 @@ class timeToPlayVC: UIViewController {
             clickTime += 1
         default: break
         }
+    }
+    
+    func generateNumberFrom(count: Int) -> [Int] {
+        
+        indexArray.removeAll()
+        for i in 1...count - 1 {
+            indexArray.append(i)
+        }
+        randomNumArr.removeAll()
+        for _ in 0...count - 2 {
+            let arrayIndex = Int(arc4random_uniform(UInt32(indexArray.count)))
+            let arrayNum = indexArray[arrayIndex]
+            randomNumArr.append(arrayNum)
+            indexArray.removeAtIndex(arrayIndex)
+        }
+        return randomNumArr
     }
     
     
@@ -197,12 +236,12 @@ extension timeToPlayVC {
                 newHolder.mode = self.mode
                 FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(newHolder)
                 FieldCollection.shareInstance.updateToDefault()
-//                let ref = FIRDatabase.database().reference()
-//                for i in 0...FieldCollection.shareInstance.currentField.count-1 {
-//                    let childRef = ref.child("Trainer").child("Field").child("\(FieldCollection.shareInstance.currentField[i].fieldName!)")
-//                    let value = ["difficulty": ""]
-//                    childRef.setValue(value)
-//                }
+                
+                let ref = FIRDatabase.database().reference()
+                let childRef = ref.child("Trainer").child("Charts").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].fieldName!)").child("\(FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].difficulty!)")
+                let value = ["Name" : self.tField.text!, "Time" : self.timeLabel.text!, "Mode" : self.mode!]
+                childRef.updateChildValues(value)
+                
                 self.performSegueWithIdentifier("charts", sender: nil)
             }))
             self.presentViewController(nameAlert, animated: true, completion: {

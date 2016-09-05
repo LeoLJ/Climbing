@@ -10,7 +10,10 @@ import UIKit
 
 class CheckFieldVC: UIViewController {
     var index: Int?
-    
+    var tField: UITextField!
+    var targetNum: Int?
+
+
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var fieldImage: UIImageView!
@@ -63,6 +66,7 @@ class CheckFieldVC: UIViewController {
             vc.fieldIndex = self.index
             vc.routeIndex =  self.difficultyTableView.indexPathForSelectedRow?.row
             vc.mode = sender as? String
+            vc.targetNum = self.targetNum
             // Pass the selected object to the new view controller.
         }
         
@@ -76,7 +80,7 @@ extension CheckFieldVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("difficultyCell",forIndexPath: indexPath)
         //if FieldCollection.shareInstance.currentField[index!].challangeRoute != nil {
-        cell.textLabel?.text = FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].difficulty
+        cell.textLabel?.text = "Rank:\(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].difficulty!)"
         //}
         return cell
     }
@@ -115,10 +119,26 @@ extension CheckFieldVC: UITableViewDelegate {
         alert.addAction(UIAlertAction(title: "Random", style: .Default, handler:{ _ in
             self.performSegueWithIdentifier("letsPlay", sender: "Random")
         }))
+        alert.addAction(UIAlertAction(title: "Random-EX", style: .Default, handler:{ _ in
+            let nameAlert = UIAlertController(title: "Give A Number", message: "", preferredStyle: .Alert)
+            nameAlert.addTextFieldWithConfigurationHandler(self.configurationTextField)
+            nameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
+            nameAlert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
+                self.targetNum = Int(self.tField.text!)
+                self.performSegueWithIdentifier("letsPlay", sender: "Random-EX")
+            }))
+            self.presentViewController(nameAlert, animated: true, completion: {
+            })
+        }))
         self.presentViewController(alert, animated: true, completion: {
         })
     }
-    
+    func configurationTextField(textField: UITextField!)
+    {        
+        textField.placeholder = "Enter a number"
+        textField.keyboardType = .NumberPad
+        tField = textField
+    }
 
 }
 

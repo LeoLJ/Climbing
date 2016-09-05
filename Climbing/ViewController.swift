@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     
     var index: Int?
     var tField: UITextField!
+    var i = 0
+    let ref = FIRDatabase.database().reference()
+
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.blackColor()
@@ -23,26 +26,9 @@ class ViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.deleteTarget), name: "deleteTarget:", object: nil)
         // Do any additional setup after loading the view, typically from a nib.
-        
-//        UIDevice.currentDevice().setValue(UIInterfaceOrientation.LandscapeLeft.rawValue, forKey: "orientation")
 
     }
     
-//    override func shouldAutorotate() -> Bool {
-//        // Lock autorotate
-//        return false
-//    }
-//    
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        // Only allow Landscape
-//        return UIInterfaceOrientationMask.LandscapeLeft
-//    }
-//    
-//    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-//        
-//        // Only allow Portrait
-//        return UIInterfaceOrientation.LandscapeLeft
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -65,23 +51,29 @@ class ViewController: UIViewController {
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:handleCancel))
         alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
-            newRoute.difficulty = "Rank:\(self.tField.text!)"
+            newRoute.difficulty = self.tField.text!
+            // update Route to Firebase
+            let childRouteRef = self.ref.child("Trainer").child("Route").child("\(FieldCollection.shareInstance.currentField[self.index!].fieldName!)").childByAutoId()
+            
+            let value = ["ID": self.tField.text!]
+            childRouteRef.updateChildValues(value)
             var currentCenter = [String]()
+            // update Path to Firebase
+            let childPathRef = self.ref.child("Trainer").child("Path").child("\(FieldCollection.shareInstance.currentField[self.index!].fieldName!)").child(self.tField.text!)
             for view: UIView in self.view.subviews {
                 if (view is UIImageView) {
                     let center = NSStringFromCGPoint(view.center)
                     currentCenter.append(center)
+                    let value = ["\(self.i)":center]
+                    childPathRef.updateChildValues(value)
+                    self.i+=1
                 }
             }
             newRoute.center = currentCenter
             FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
-//            let ref = FIRDatabase.database().reference()
-//            let childRef = ref.child("Trainer").child("FieldName")
-//            let childRefWithKey = childRef.child(childRef.key).child(FieldCollection.shareInstance.currentField[self.index!].fieldName!)
-//            let value = ["difficulty": self.tField.text!]
-//            childRefWithKey.updateChildValues(value)
             FieldCollection.shareInstance.updateToDefault()
             self.deleteTarget()
+            self.i = 0
         }))
         self.presentViewController(alert, animated: true, completion: {
             
@@ -100,7 +92,6 @@ class ViewController: UIViewController {
     func configurationTextField(textField: UITextField!)
     {
         textField.placeholder = "Enter a rank"
-        textField.keyboardType = .NumberPad
         tField = textField
     }
     
@@ -120,8 +111,6 @@ class ViewController: UIViewController {
                 view.removeFromSuperview()
             }
         }
-//        self.scoreLabel.text = "0"
-//        TargetHouse.shareInstance.currentPoint = 0
     }
 }
 

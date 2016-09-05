@@ -7,25 +7,32 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TargetModel: NSObject, UIGestureRecognizerDelegate {
     
     var image: UIImageView
     var imageName: String
     var id: UInt32?
+    let systemSoundID: SystemSoundID = 1016
+
 
     
     func tapBubbleOnce(sender: UITapGestureRecognizer?) {
         if image.backgroundColor == UIColor.whiteColor() {
-        image.backgroundColor = UIColor.yellowColor()
+        image.image = UIImage(named: "Smile")
+            image.backgroundColor = UIColor.clearColor()
+            image.layer.sublayers?.removeAll()
+            AudioServicesPlaySystemSound (systemSoundID)
         //    image.image = UIImage(named: "pika")
         //TargetHouse.shareInstance.currentPoint += 1
             NSNotificationCenter.defaultCenter().postNotificationName("tapBubbleOnce:", object: nil)
         }
     }
     
+    
     func tapBubbleTwice(sender: UITapGestureRecognizer?) {
-        if image.backgroundColor == UIColor.yellowColor() {
+        if image.image == UIImage(named: "smile") {
         image.backgroundColor = UIColor.whiteColor()
         //    image.image = UIImage(named: "pokeball")
         //TargetHouse.shareInstance.currentPoint -= 1
@@ -45,7 +52,6 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
         if point.y < (mainFrame?.minY)! + 30 || point.x > (mainFrame?.maxX)! - 20 || point.x < (mainFrame?.minX)! + 35 {
 //                let newframe = CGRectMake(point.x, point.y, 60, 60)
 //                image.frame = newframe
-            print(point)
         }else{
         image.center.x = point.x
         image.center.y = point.y
@@ -84,6 +90,18 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
         dragBall.delegate = self
         
         
+    }
+    //sound setting
+    func playSound(soundName: String)
+    {
+        let coinSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(soundName, ofType: "m4a")!)
+        do{
+            let audioPlayer = try AVAudioPlayer(contentsOfURL:coinSound)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        }catch {
+            print("Error getting the audio file")
+        }
     }
 
 }

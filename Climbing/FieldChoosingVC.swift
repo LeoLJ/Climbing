@@ -10,6 +10,8 @@ import UIKit
 import FirebaseDatabase
 class FieldChoosingVC: UIViewController {
     var tField: UITextField!
+    
+
 
     @IBOutlet weak var fieldTableView: UITableView!
 //    let userDefault = NSUserDefaults.standardUserDefaults()
@@ -39,7 +41,6 @@ class FieldChoosingVC: UIViewController {
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
         alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
-
             let ref = FIRDatabase.database().reference()
             let childRef = ref.child("Trainer").child("Field").childByAutoId()
             let value = ["FieldName":self.tField.text!]
@@ -94,8 +95,11 @@ extension FieldChoosingVC: UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            FieldCollection.shareInstance.currentField.removeAtIndex(indexPath.row)
 //            FieldCollection.shareInstance.updateToDefault()
+            let ref = FIRDatabase.database().reference()
+            let childRef = ref.child("Trainer").child("Field").child(FieldCollection.shareInstance.currentField[indexPath.row].fieldId!)
+            childRef.removeValue()
+            FieldCollection.shareInstance.currentField.removeAtIndex(indexPath.row)
             reload()
         }
     }

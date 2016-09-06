@@ -31,9 +31,11 @@ class FieldCollection {
         ref.child("Trainer").child("Field").observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
                 let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                let fieldId = childSnapshot.key
                 let name = childSnapshot.value!.objectForKey("FieldName") as? String
-                let newField = FieldModel(fieldName: nil, challangeRoute: [])
+                let newField = FieldModel(fieldName: nil, challangeRoute: [], fieldId: nil)
                 newField.fieldName = name
+                newField.fieldId = fieldId
                 FieldCollection.shareInstance.currentField.append(newField)
             }
             }, withCancelBlock: { error in
@@ -46,11 +48,12 @@ class FieldCollection {
         ref.child("Trainer").child("Field").observeEventType(.ChildAdded, withBlock: { snapshot in
             
                 //let childSnapshot = snapshot.childSnapshotForPath(snapshot.key)
+                let fieldID = snapshot.key
                 let name = snapshot.value!.objectForKey("FieldName") as? String
-                let newField = FieldModel(fieldName: nil, challangeRoute: [])
+                let newField = FieldModel(fieldName: nil, challangeRoute: [], fieldId: nil)
                 newField.fieldName = name
+                newField.fieldId = fieldID
                 FieldCollection.shareInstance.currentField.append(newField)
-                print(name)
             }, withCancelBlock: { error in
                 print(error.description)
         })

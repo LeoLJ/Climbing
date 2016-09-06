@@ -61,12 +61,13 @@ class CheckFieldVC: UIViewController {
             ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[index!].fieldName!).observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
                 let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                let routeID = childSnapshot.key
                 let name = childSnapshot.value!.objectForKey("ID") as? String
-                let newRoute = Route(difficulty: nil, center: nil, rankList: [])
+                let newRoute = Route(difficulty: nil, center: nil, rankList: [], routeId: nil)
                 newRoute.difficulty = name
+                newRoute.routeId = routeID
                 FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
                 self.difficultyTableView.reloadData()
-                print(name)
             }
             }, withCancelBlock: { error in
                 print(error.description)
@@ -118,6 +119,9 @@ extension CheckFieldVC: UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            let ref = FIRDatabase.database().reference()
+            let childRef = ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[index!].fieldName!).child(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].routeId!)
+            childRef.removeValue()
             FieldCollection.shareInstance.currentField[index!].challangeRoute.removeAtIndex(indexPath.row)
 //            FieldCollection.shareInstance.updateToDefault()
             self.difficultyTableView.reloadData()

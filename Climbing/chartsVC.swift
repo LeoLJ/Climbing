@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,10 +21,10 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.chartsTableView.dataSource = self
         self.chartsTableView.allowsSelection = false
         // Do any additional setup after loading the view.
-        sortArray()
     }
     
     override func viewDidAppear(animated: Bool) {
+        sortArray()
         self.chartsTableView.reloadData()
     }
 
@@ -33,7 +34,8 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func sortArray() {
-        FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList.sortInPlace({ $0.time < $1.time })
+        FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList.sortInPlace({ $0.time! < $1.time })
+        //.compare($1.time!) == .OrderedAscending })
     }
     
     override func willMoveToParentViewController(parent: UIViewController?) {
@@ -67,6 +69,9 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            let ref = FIRDatabase.database().reference()
+            let childRef = ref.child("Trainer").child("Charts").child(FieldCollection.shareInstance.currentField[fieldIndex!].fieldName!).child(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!).child(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList[indexPath.row].listId!)
+            childRef.removeValue()
             FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].rankList.removeAtIndex(indexPath.row)
             //FieldCollection.shareInstance.updateToDefault()
             self.chartsTableView.reloadData()

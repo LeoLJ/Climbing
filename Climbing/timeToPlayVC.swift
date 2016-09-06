@@ -178,15 +178,17 @@ class timeToPlayVC: UIViewController {
     
     // Get Chart data form firebase
     func getChartFromFirebase() {
+        FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.removeAll()
         ref.child("Trainer").child("Charts").child(FieldCollection.shareInstance.currentField[fieldIndex!].fieldName!).child(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!).observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
-                let players = RankList(name: nil, time: nil, mode: nil)
+                let players = RankList(name: nil, time: nil, mode: nil, listId: nil)
                 let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                let listID = childSnapshot.key
                 players.name = childSnapshot.value!.objectForKey("Name") as? String
                 players.mode = childSnapshot.value!.objectForKey("Mode") as? String
-                players.time = childSnapshot.value!.objectForKey("Time") as? String
+                players.time = (childSnapshot.value!.objectForKey("Time") as? String)!
+                players.listId = listID
                 FieldCollection.shareInstance.currentField[self.fieldIndex!].challangeRoute[self.routeIndex!].rankList.append(players)
-                print(players)
             }
             }, withCancelBlock: { error in
                 print(error.description)

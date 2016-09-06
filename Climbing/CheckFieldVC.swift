@@ -120,8 +120,10 @@ extension CheckFieldVC: UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let ref = FIRDatabase.database().reference()
-            let childRef = ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[index!].fieldName!).child(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].routeId!)
-            childRef.removeValue()
+            let routeRef = ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[index!].fieldName!).child(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].routeId!)
+            let pathRef = ref.child("Trainer").child("Path").child(FieldCollection.shareInstance.currentField[index!].fieldName!).child(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].difficulty!)
+            pathRef.removeValue()
+            routeRef.removeValue()
             FieldCollection.shareInstance.currentField[index!].challangeRoute.removeAtIndex(indexPath.row)
 //            FieldCollection.shareInstance.updateToDefault()
             self.difficultyTableView.reloadData()

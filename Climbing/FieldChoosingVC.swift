@@ -97,8 +97,14 @@ extension FieldChoosingVC: UITableViewDataSource {
         if editingStyle == .Delete {
 //            FieldCollection.shareInstance.updateToDefault()
             let ref = FIRDatabase.database().reference()
-            let childRef = ref.child("Trainer").child("Field").child(FieldCollection.shareInstance.currentField[indexPath.row].fieldId!)
-            childRef.removeValue()
+            let fieldRef = ref.child("Trainer").child("Field").child(FieldCollection.shareInstance.currentField[indexPath.row].fieldId!)
+            let routeRef = ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[indexPath.row].fieldName!)
+            let pathRef = ref.child("Trainer").child("Path").child(FieldCollection.shareInstance.currentField[indexPath.row].fieldName!)
+            let chartsRef = ref.child("Trainer").child("Charts").child(FieldCollection.shareInstance.currentField[indexPath.row].fieldName!)
+            fieldRef.removeValue()
+            routeRef.removeValue()
+            pathRef.removeValue()
+            chartsRef.removeValue()
             FieldCollection.shareInstance.currentField.removeAtIndex(indexPath.row)
             reload()
         }

@@ -37,6 +37,7 @@ class CheckFieldVC: UIViewController {
         
         self.titleLabel.text = FieldCollection.shareInstance.currentField[index!].fieldName
         getRouteFromFirebase()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +57,8 @@ class CheckFieldVC: UIViewController {
     
     // Get Route data form firebase
     func getRouteFromFirebase() {
-        ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[index!].fieldName!).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            FieldCollection.shareInstance.currentField[self.index!].challangeRoute.removeAll()
+            ref.child("Trainer").child("Route").child(FieldCollection.shareInstance.currentField[index!].fieldName!).observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
                 let childSnapshot = snapshot.childSnapshotForPath(child.key)
                 let name = childSnapshot.value!.objectForKey("ID") as? String

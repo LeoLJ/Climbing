@@ -42,14 +42,15 @@ class FieldCollection {
     }
     
     func getNewFieldFromFirebase() {
-        ref.child("Trainer").child("Field").observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
+        FieldCollection.shareInstance.currentField.removeAll()
+        ref.child("Trainer").child("Field").observeEventType(.ChildAdded, withBlock: { snapshot in
             
-                let childSnapshot = snapshot.childSnapshotForPath(snapshot.key)
-                let name = childSnapshot.value!//.objectForKey("FieldName") //as? String
-//                let newField = FieldModel(fieldName: nil, challangeRoute: [])
-//                newField.fieldName = name
-//                FieldCollection.shareInstance.currentField.append(newField)
-                print(snapshot)
+                //let childSnapshot = snapshot.childSnapshotForPath(snapshot.key)
+                let name = snapshot.value!.objectForKey("FieldName") as? String
+                let newField = FieldModel(fieldName: nil, challangeRoute: [])
+                newField.fieldName = name
+                FieldCollection.shareInstance.currentField.append(newField)
+                print(name)
             }, withCancelBlock: { error in
                 print(error.description)
         })

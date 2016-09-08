@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     @IBAction func saveAxis(sender: AnyObject) {
         
         let newRoute = Route(difficulty: nil, center: nil, rankList: [], routeId: nil)
-        let alert = UIAlertController(title: "Give a rank", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Give a name", message: "", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:handleCancel))
         alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     
     func configurationTextField(textField: UITextField!)
     {
-        textField.placeholder = "Enter a rank"
+        textField.placeholder = "Enter a name"
         tField = textField
     }
     

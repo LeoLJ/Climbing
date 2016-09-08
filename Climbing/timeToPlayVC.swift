@@ -120,7 +120,7 @@ class timeToPlayVC: UIViewController {
                 }
                 let newTarget = TargetFactory().createTarget("\(clickTime)")
                 newTarget.image.tag = Int(newTarget.id!)
-                newTarget.image.center = CGPoint.randomPoint.random(0...Int(self.view.bounds.maxX), rangeY:0...Int(self.view.bounds.maxY))
+                newTarget.image.center = CGPoint.randomPoint.random(40...Int(self.view.bounds.maxX - 35), rangeY:40...Int(self.view.bounds.maxY - 40))
                 TargetHouse.shareInstance.currentTargets.append(newTarget)
                 view.addSubview(newTarget.image)
                 clickTime += 1

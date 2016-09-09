@@ -12,7 +12,7 @@ class TargetFactory {
     
     let mainWidth = UIScreen.mainScreen().bounds.width
     let mainHeight = UIScreen.mainScreen().bounds.height
-    let target = UIImageView(frame: CGRect(x: 120, y: 60, width: 60, height: 60))
+    let target = UIImageView(frame: CGRect(x: 120, y: 60, width: 40, height: 40))
     let id = arc4random()
     var timer: NSTimer?
     

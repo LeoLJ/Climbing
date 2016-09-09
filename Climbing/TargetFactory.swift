@@ -21,7 +21,7 @@ class TargetFactory {
         target.backgroundColor = UIColor.whiteColor()
         //target.image = UIImage(named: "pokeball")
 
-        target.layer.cornerRadius = 30
+        target.layer.cornerRadius = 20
         
         let textLayer = CATextLayer()
         textLayer.frame = target.bounds
@@ -32,7 +32,7 @@ class TargetFactory {
         textLayer.foregroundColor = UIColor.blackColor().CGColor
         textLayer.wrapped = true
         textLayer.alignmentMode = kCAAlignmentCenter
-        textLayer.fontSize = 46
+        textLayer.fontSize = 32
         textLayer.contentsScale = UIScreen.mainScreen().scale
         target.layer.addSublayer(textLayer)
         
@@ -44,7 +44,7 @@ class TargetFactory {
         target.backgroundColor = UIColor.whiteColor()
         //target.image = UIImage(named: "pokeball")
         
-        target.layer.cornerRadius = 30
+        target.layer.cornerRadius = 20
         
         let textLayer = CATextLayer()
         textLayer.frame = target.bounds
@@ -55,7 +55,7 @@ class TargetFactory {
         textLayer.foregroundColor = UIColor.blackColor().CGColor
         textLayer.wrapped = true
         textLayer.alignmentMode = kCAAlignmentCenter
-        textLayer.fontSize = 46
+        textLayer.fontSize = 32
         textLayer.contentsScale = UIScreen.mainScreen().scale
         target.layer.addSublayer(textLayer)
         

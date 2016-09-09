@@ -36,5 +36,7 @@
 	<string>1:16095479252:ios:772bc8d226460ed4</string>
 	<key>DATABASE_URL</key>
 	<string>https://climbing-c4452.firebaseio.com</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 </dict>
 </plist>

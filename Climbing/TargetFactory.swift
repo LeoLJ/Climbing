@@ -16,7 +16,7 @@ class TargetFactory {
     let id = arc4random()
     var timer: NSTimer?
     
-    func createTarget(imageName: String) -> TargetModel {
+    func createTarget(imageName: String, modeDection: Bool) -> TargetModel {
         
         target.backgroundColor = UIColor.whiteColor()
         //target.image = UIImage(named: "pokeball")
@@ -36,7 +36,7 @@ class TargetFactory {
         textLayer.contentsScale = UIScreen.mainScreen().scale
         target.layer.addSublayer(textLayer)
         
-        return TargetModel(image: target, imageName: imageName, id: id)
+        return TargetModel(image: target, imageName: imageName, id: id, modeDetection: modeDection)
     }
     
     func createFlyTarget(imageName: String) -> TargetModel {
@@ -59,7 +59,7 @@ class TargetFactory {
         textLayer.contentsScale = UIScreen.mainScreen().scale
         target.layer.addSublayer(textLayer)
         
-        return TargetModel(image: target, imageName: imageName, id: id)
+        return TargetModel(image: target, imageName: imageName, id: id, modeDetection: true)
         
     }
     

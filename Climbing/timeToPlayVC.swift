@@ -75,7 +75,7 @@ class timeToPlayVC: UIViewController {
     }
     
     func creatTarget(i:Int) {
-        let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)")
+        let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)", modeDection: true)
         newTarget.image.tag = Int(newTarget.id!)
         newTarget.image.center = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
         TargetHouse.shareInstance.currentTargets.append(newTarget)
@@ -101,7 +101,7 @@ class timeToPlayVC: UIViewController {
                     generateNumberFrom(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count)
                     start()
                 }
-                let newTarget = TargetFactory().createTarget("\(clickTime)")
+                let newTarget = TargetFactory().createTarget("\(clickTime)", modeDection: true)
                 newTarget.image.tag = Int(newTarget.id!)
                 //newTarget.image.center = CGPoint.randomPoint.random(0...Int(self.view.bounds.maxX), rangeY:0...Int(self.view.bounds.maxY))
                 let i = randomNumArr[clickTime - 1]
@@ -118,7 +118,7 @@ class timeToPlayVC: UIViewController {
                 if clickTime == 1 {
                     start()
                 }
-                let newTarget = TargetFactory().createTarget("\(clickTime)")
+                let newTarget = TargetFactory().createTarget("\(clickTime)", modeDection: true)
                 newTarget.image.tag = Int(newTarget.id!)
                 newTarget.image.center = CGPoint.randomPoint.random(40...Int(self.view.bounds.maxX - 35), rangeY:40...Int(self.view.bounds.maxY - 40))
                 TargetHouse.shareInstance.currentTargets.append(newTarget)

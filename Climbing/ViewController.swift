@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 
     @IBAction func addTarget(sender: AnyObject) {
         
-        let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)")
+        let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)", modeDection: false)
         newTarget.image.tag = Int(newTarget.id!)
         TargetHouse.shareInstance.currentTargets.append(newTarget)
         view.addSubview(newTarget.image)

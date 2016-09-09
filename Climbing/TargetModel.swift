@@ -15,6 +15,7 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
     var imageName: String
     var id: UInt32?
     let systemSoundID: SystemSoundID = 1016
+    var modeDetection: Bool
 
 
     
@@ -59,34 +60,40 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
     }
     
     
-    init(image: UIImageView, imageName: String, id: UInt32?){
+    init(image: UIImageView, imageName: String, id: UInt32?, modeDetection: Bool){
         
         self.imageName = imageName
         self.image  = image
         self.image.image = UIImage(named: imageName)
         self.id = id
+        self.modeDetection = modeDetection
         
         super.init()
         
         image.userInteractionEnabled = true
         
-        let tapOne = UITapGestureRecognizer(target: self, action: #selector(TargetModel.tapBubbleOnce(_:)))
-        tapOne.numberOfTapsRequired = 1
-        image.addGestureRecognizer(tapOne)
-        
-        let tapTwo = UITapGestureRecognizer(target: self, action: #selector(TargetModel.tapBubbleTwice(_:)))
-        tapTwo.numberOfTapsRequired = 2
-        image.addGestureRecognizer(tapTwo)
+        if modeDetection {
+            
+            let tapOne = UITapGestureRecognizer(target: self, action: #selector(TargetModel.tapBubbleOnce(_:)))
+            tapOne.numberOfTapsRequired = 1
+            image.addGestureRecognizer(tapOne)
+            
+            let tapTwo = UITapGestureRecognizer(target: self, action: #selector(TargetModel.tapBubbleTwice(_:)))
+            tapTwo.numberOfTapsRequired = 2
+            image.addGestureRecognizer(tapTwo)
+            
+            tapOne.delegate = self
+            tapTwo.delegate = self
+            
+        }
         
         
         let dragBall = UIPanGestureRecognizer(target: self, action: #selector(TargetModel.dragTarget(_:)))
         image.addGestureRecognizer(dragBall)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(TargetModel.longPressBubble(_:)))
-        image.addGestureRecognizer(longPress)
-        
-        tapOne.delegate = self
-        tapTwo.delegate = self
+        image.addGestureRecognizer(longPress)        
+
         dragBall.delegate = self
         
         

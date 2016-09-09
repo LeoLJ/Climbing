@@ -45,7 +45,7 @@ class FieldCollection {
     
     func getNewFieldFromFirebase() {
         FieldCollection.shareInstance.currentField.removeAll()
-        ref.child("Trainer").child("Field").observeEventType(.ChildAdded, withBlock: { snapshot in
+        ref.child("Trainer").child("Field").observeEventType(.Value, withBlock: { snapshot in
             
                 //let childSnapshot = snapshot.childSnapshotForPath(snapshot.key)
                 let fieldID = snapshot.key

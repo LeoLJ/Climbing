@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 
     @IBAction func addTarget(sender: AnyObject) {
         
-        let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)")
+        let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)", modeDection: false)
         newTarget.image.tag = Int(newTarget.id!)
         TargetHouse.shareInstance.currentTargets.append(newTarget)
         view.addSubview(newTarget.image)
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     @IBAction func saveAxis(sender: AnyObject) {
         
         let newRoute = Route(difficulty: nil, center: nil, rankList: [], routeId: nil)
-        let alert = UIAlertController(title: "Give a rank", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Give a name", message: "", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:handleCancel))
         alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
@@ -80,7 +80,40 @@ class ViewController: UIViewController {
         })
     }
     
-    
+    override func viewWillDisappear(animated: Bool) {
+        let newRoute = Route(difficulty: nil, center: nil, rankList: [], routeId: nil)
+        let alert = UIAlertController(title: "Give a name", message: "", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler(configurationTextField)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:handleCancel))
+        alert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
+            newRoute.difficulty = self.tField.text!
+            // update Route to Firebase
+            let childRouteRef = self.ref.child("Trainer").child("Route").child("\(FieldCollection.shareInstance.currentField[self.index!].fieldName!)").childByAutoId()
+            
+            let value = ["ID": self.tField.text!]
+            childRouteRef.updateChildValues(value)
+            var currentCenter = [String]()
+            // update Path to Firebase
+            let childPathRef = self.ref.child("Trainer").child("Path").child("\(FieldCollection.shareInstance.currentField[self.index!].fieldName!)").child(self.tField.text!)
+            for view: UIView in self.view.subviews {
+                if (view is UIImageView) {
+                    let center = NSStringFromCGPoint(view.center)
+                    currentCenter.append(center)
+                    let value = ["\(self.i)":center]
+                    childPathRef.updateChildValues(value)
+                    self.i+=1
+                }
+            }
+            newRoute.center = currentCenter
+            FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
+            //FieldCollection.shareInstance.updateToDefault()
+            self.deleteTarget()
+            self.i = 0
+        }))
+        self.presentViewController(alert, animated: true, completion: {
+            
+        })
+    }
     
     override func willMoveToParentViewController(parent: UIViewController?) {
         
@@ -91,13 +124,13 @@ class ViewController: UIViewController {
     
     func configurationTextField(textField: UITextField!)
     {
-        textField.placeholder = "Enter a rank"
+        textField.placeholder = "Enter a name"
         tField = textField
     }
     
     func handleCancel(alertView: UIAlertAction!)
     {
-        
+        //pause()
     }
     
     func refresh(){

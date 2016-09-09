@@ -46,7 +46,9 @@ class FieldChoosingVC: UIViewController {
             let value = ["FieldName":self.tField.text!]
             childRef.updateChildValues(value)
             //FieldCollection.shareInstance.numbers += 1
-            FieldCollection.shareInstance.getNewFieldFromFirebase()
+            FieldCollection.shareInstance.currentField.removeAll()
+            FieldCollection.shareInstance.getFieldFromFirebase()
+            self.reload()
         }))
         self.presentViewController(alert, animated: true, completion: {
             

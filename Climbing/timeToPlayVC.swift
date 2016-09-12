@@ -30,6 +30,7 @@ class timeToPlayVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
+        
         if mode == "Random-EX" {
             rankLabel.text = "Random-EX"
             displayAll()
@@ -44,7 +45,13 @@ class timeToPlayVC: UIViewController {
         }
     }
     
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
     override func viewWillAppear(animated: Bool) {
+        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         self.view.layoutIfNeeded()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(timeToPlayVC.tapBubbleOnce), name: "tapBubbleOnce:", object: nil)
     }

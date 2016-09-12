@@ -17,6 +17,7 @@ class FieldChoosingVC: UIViewController {
 //    let userDefault = NSUserDefaults.standardUserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if FieldCollection.shareInstance.currentField.count == 0 {
         FieldCollection.shareInstance.getFieldFromFirebase()
         }

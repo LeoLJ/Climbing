@@ -25,6 +25,7 @@ class CheckFieldVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.difficultyTableView.delegate = self
         self.difficultyTableView.dataSource = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CheckFieldVC.reload), name: "reload:", object: nil)
@@ -36,8 +37,16 @@ class CheckFieldVC: UIViewController {
         self.navigationController?.navigationBar.translucent = true
         
         self.titleLabel.text = FieldCollection.shareInstance.currentField[index!].fieldName
-        getRouteFromFirebase()
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        getRouteFromFirebase()
+    }
+    override func shouldAutorotate() -> Bool {
+        return true
     }
 
     override func didReceiveMemoryWarning() {

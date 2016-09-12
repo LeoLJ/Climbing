@@ -30,6 +30,14 @@ class ViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(animated: Bool) {
+        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

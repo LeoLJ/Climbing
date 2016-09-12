@@ -19,9 +19,17 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.chartsTableView.dataSource = self
         self.chartsTableView.allowsSelection = false
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(animated: Bool) {
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+    }
+    override func shouldAutorotate() -> Bool {
+        return true
     }
     
     override func viewDidAppear(animated: Bool) {

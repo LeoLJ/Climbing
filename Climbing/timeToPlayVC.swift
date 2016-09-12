@@ -30,11 +30,17 @@ class timeToPlayVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
-        rankLabel.text = "Rank:\(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!)"
-        if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center == nil {
-        getPathFromFirebase()
+        if mode == "Random-EX" {
+            rankLabel.text = "Random-EX"
+            displayAll()
         }else {
-        displayAll()
+            rankLabel.text = "Rank:\(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].difficulty!)"
+            
+            if FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center == nil {
+                getPathFromFirebase()
+            }else {
+                displayAll()
+            }
         }
     }
     
@@ -63,7 +69,12 @@ class timeToPlayVC: UIViewController {
             }else if mode == "Random" {
                 creatTarget(0)
             }else if mode == "Random-EX" {
-                creatTarget(0)
+                let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)", modeDection: true)
+                newTarget.image.tag = Int(newTarget.id!)
+                let ratioPoint = CGPoint(x: 0.2, y: 0.9)
+                newTarget.image.center = TargetHouse.shareInstance.convertScaleToPoint(ratioPoint)
+                TargetHouse.shareInstance.currentTargets.append(newTarget)
+                view.addSubview(newTarget.image)
         }
     }
     
@@ -121,13 +132,16 @@ class timeToPlayVC: UIViewController {
                 }
                 let newTarget = TargetFactory().createTarget("\(clickTime)", modeDection: true)
                 newTarget.image.tag = Int(newTarget.id!)
-                newTarget.image.center = CGPoint.randomPoint.random(80...Int(self.view.bounds.maxX - 80), rangeY:80...Int(self.view.bounds.maxY - 80))
+                let randomNumX:Double = Double(randomIntFromRange(1000000...9000000)) / Double(10000000)
+                let randomNumY:Double = Double(randomIntFromRange(1000000...9000000)) / Double(10000000)
+                let randomCGPoint = CGPoint(x: randomNumX, y: randomNumY)
+                newTarget.image.center = TargetHouse.shareInstance.convertScaleToPoint(randomCGPoint)
                 TargetHouse.shareInstance.currentTargets.append(newTarget)
                 view.addSubview(newTarget.image)
                 clickTime += 1
             }else if clickTime == targetNum {
                 stop()
-                record()
+                //record()
             }
         case "Default"?:
             if clickTime < FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count  {
@@ -157,6 +171,11 @@ class timeToPlayVC: UIViewController {
             indexArray.removeAtIndex(arrayIndex)
         }
         return randomNumArr
+    }
+    
+    
+    func randomIntFromRange(numRange:Range<Int>) ->Int{
+        return Int(arc4random_uniform(UInt32((numRange.endIndex - numRange.startIndex))) + UInt32(numRange.startIndex))
     }
     
     
@@ -294,6 +313,7 @@ extension timeToPlayVC {
         textField.placeholder = "Enter a name"
         tField = textField
     }
+ 
 }
 
 extension CGPoint {

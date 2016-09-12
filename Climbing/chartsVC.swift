@@ -14,6 +14,7 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var chartsTableView: UITableView!
     var fieldIndex: Int?
     var routeIndex: Int?
+    var mode: String?
 
 
     override func viewDidLoad() {
@@ -40,14 +41,19 @@ class chartsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func willMoveToParentViewController(parent: UIViewController?) {
         if parent == nil {
-            if let navigationController = self.navigationController {
-                var viewControllers = navigationController.viewControllers
-                let viewControllersCount = viewControllers.count
-                if (viewControllersCount > 2) {
-                    viewControllers.removeAtIndex(viewControllersCount - 2)
-                    navigationController.setViewControllers(viewControllers, animated:false)
+            if mode == "Charts" {
+                
+            }else{
+                if let navigationController = self.navigationController {
+                    var viewControllers = navigationController.viewControllers
+                    let viewControllersCount = viewControllers.count
+                    if (viewControllersCount > 2) {
+                        viewControllers.removeAtIndex(viewControllersCount - 2)
+                        navigationController.setViewControllers(viewControllers, animated:false)
+                    }
                 }
-            }        }
+            }
+        }
     }
     
     

@@ -54,6 +54,17 @@ class CheckFieldVC: UIViewController {
        // self.difficultyTableView.reloadData()
     }
     
+    @IBAction func goRandomEX(sender: AnyObject) {
+            let nameAlert = UIAlertController(title: "Give A Number", message: "", preferredStyle: .Alert)
+            nameAlert.addTextFieldWithConfigurationHandler(self.configurationTextField)
+            nameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
+            nameAlert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
+                self.targetNum = Int(self.tField.text!)
+                self.performSegueWithIdentifier("letsPlay", sender: "Random-EX")
+            }))
+            self.presentViewController(nameAlert, animated: true, completion: {
+            })
+    }
     // Get Route data form firebase
     func getRouteFromFirebase() {
             FieldCollection.shareInstance.currentField[self.index!].challangeRoute.removeAll()
@@ -67,6 +78,24 @@ class CheckFieldVC: UIViewController {
                 newRoute.routeId = routeID
                 FieldCollection.shareInstance.currentField[self.index!].challangeRoute.append(newRoute)
                 self.difficultyTableView.reloadData()
+            }
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+    }
+    
+    func getChartFromFirebase() {
+        FieldCollection.shareInstance.currentField[self.index!].challangeRoute[(self.difficultyTableView.indexPathForSelectedRow?.row)!].rankList.removeAll()
+        ref.child("Trainer").child("Charts").child(FieldCollection.shareInstance.currentField[self.index!].fieldName!).child(FieldCollection.shareInstance.currentField[self.index!].challangeRoute[(self.difficultyTableView.indexPathForSelectedRow?.row)!].difficulty!).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let players = RankList(name: nil, time: nil, mode: nil, listId: nil)
+                let childSnapshot = snapshot.childSnapshotForPath(child.key)
+                let listID = childSnapshot.key
+                players.name = childSnapshot.value!.objectForKey("Name") as? String
+                players.mode = childSnapshot.value!.objectForKey("Mode") as? String
+                players.time = (childSnapshot.value!.objectForKey("Time") as? String)!
+                players.listId = listID
+                FieldCollection.shareInstance.currentField[self.index!].challangeRoute[(self.difficultyTableView.indexPathForSelectedRow?.row)!].rankList.append(players)
             }
             }, withCancelBlock: { error in
                 print(error.description)
@@ -88,6 +117,12 @@ class CheckFieldVC: UIViewController {
             vc.mode = sender as? String
             vc.targetNum = self.targetNum
             // Pass the selected object to the new view controller.
+        }else if segue.identifier == "GoCharts" {
+            let vc = segue.destinationViewController as! chartsVC
+            vc.fieldIndex = self.index
+            vc.mode = sender as? String
+            vc.routeIndex =  self.difficultyTableView.indexPathForSelectedRow?.row
+            getChartFromFirebase()
         }
         
     }
@@ -144,17 +179,11 @@ extension CheckFieldVC: UITableViewDelegate {
         alert.addAction(UIAlertAction(title: "Random", style: .Default, handler:{ _ in
             self.performSegueWithIdentifier("letsPlay", sender: "Random")
         }))
-        alert.addAction(UIAlertAction(title: "Random-EX", style: .Default, handler:{ _ in
-            let nameAlert = UIAlertController(title: "Give A Number", message: "", preferredStyle: .Alert)
-            nameAlert.addTextFieldWithConfigurationHandler(self.configurationTextField)
-            nameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
-            nameAlert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
-                self.targetNum = Int(self.tField.text!)
-                self.performSegueWithIdentifier("letsPlay", sender: "Random-EX")
-            }))
-            self.presentViewController(nameAlert, animated: true, completion: {
-            })
+        
+        alert.addAction(UIAlertAction(title: "Charts", style: .Default, handler:{ _ in
+            self.performSegueWithIdentifier("GoCharts", sender: "Charts")
         }))
+        
         self.presentViewController(alert, animated: true, completion: {
         })
     }

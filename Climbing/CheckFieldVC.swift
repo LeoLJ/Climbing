@@ -107,9 +107,9 @@ class CheckFieldVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "creatNewRoute" {
-            let vc = segue.destinationViewController as! ViewController
+            let nav = segue.destinationViewController as! UINavigationController
+            let vc = nav.topViewController as! ViewController
             vc.index = self.index
-            // Pass the selected object to the new view controller.
         }else if segue.identifier == "letsPlay" {
             let vc = segue.destinationViewController as! timeToPlayVC
             vc.fieldIndex = self.index

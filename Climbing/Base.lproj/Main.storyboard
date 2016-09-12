@@ -242,20 +242,11 @@
                                     <action selector="addTarget:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zd6-3Y-5fo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eak-Zn-V18">
-                                <rect key="frame" x="40" y="72" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveAxis:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tzf-PP-llL"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wtG-HT-ftf" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="6U8-Lv-xnd"/>
-                            <constraint firstItem="Eak-Zn-V18" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="bzg-5R-IYF"/>
                             <constraint firstItem="wtG-HT-ftf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fn6-2U-64d"/>
-                            <constraint firstItem="Eak-Zn-V18" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="kTk-P0-zmu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="L6d-Ev-aUj">

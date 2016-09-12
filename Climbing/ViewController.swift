@@ -62,7 +62,8 @@ class ViewController: UIViewController {
             let childPathRef = self.ref.child("Trainer").child("Path").child("\(FieldCollection.shareInstance.currentField[self.index!].fieldName!)").child(self.tField.text!)
             for view: UIView in self.view.subviews {
                 if (view is UIImageView) {
-                    let center = NSStringFromCGPoint(view.center)
+                    let ratioCenter = TargetHouse.shareInstance.convertPointToScale(view.center)
+                    let center = NSStringFromCGPoint(ratioCenter)
                     currentCenter.append(center)
                     let value = ["\(self.i)":center]
                     childPathRef.updateChildValues(value)

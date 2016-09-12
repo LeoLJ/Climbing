@@ -45,14 +45,13 @@ class CheckFieldVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     @IBAction func addDifficulty(sender: AnyObject) {
         
     }
     
     func reload() {
-        self.difficultyTableView.reloadData()
+        getRouteFromFirebase()
+       // self.difficultyTableView.reloadData()
     }
     
     // Get Route data form firebase
@@ -101,7 +100,7 @@ extension CheckFieldVC: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("difficultyCell",forIndexPath: indexPath)
         //if FieldCollection.shareInstance.currentField[index!].challangeRoute != nil {
-        cell.textLabel?.text = "Rank:\(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].difficulty!)"
+        cell.textLabel?.text = "\(FieldCollection.shareInstance.currentField[index!].challangeRoute[indexPath.row].difficulty!)"
         //}
         return cell
     }

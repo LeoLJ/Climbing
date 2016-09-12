@@ -77,7 +77,8 @@ class timeToPlayVC: UIViewController {
     func creatTarget(i:Int) {
         let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)", modeDection: true)
         newTarget.image.tag = Int(newTarget.id!)
-        newTarget.image.center = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
+        let ratioPoint = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
+        newTarget.image.center = TargetHouse.shareInstance.convertScaleToPoint(ratioPoint)
         TargetHouse.shareInstance.currentTargets.append(newTarget)
         view.addSubview(newTarget.image)
     }
@@ -120,7 +121,7 @@ class timeToPlayVC: UIViewController {
                 }
                 let newTarget = TargetFactory().createTarget("\(clickTime)", modeDection: true)
                 newTarget.image.tag = Int(newTarget.id!)
-                newTarget.image.center = CGPoint.randomPoint.random(40...Int(self.view.bounds.maxX - 35), rangeY:40...Int(self.view.bounds.maxY - 40))
+                newTarget.image.center = CGPoint.randomPoint.random(80...Int(self.view.bounds.maxX - 80), rangeY:80...Int(self.view.bounds.maxY - 80))
                 TargetHouse.shareInstance.currentTargets.append(newTarget)
                 view.addSubview(newTarget.image)
                 clickTime += 1
@@ -299,7 +300,8 @@ extension CGPoint {
     
     /*private functions that help alleviate the ambiguity of the modulo bias
      and nested typecasting as well as recycle similar functionality
-     for either Int or Range type parameter inputs */
+     for either Int or Range type parameter inputs 
+     https://github.com/princetrunks/Random-CGPoint-Extension */
     
     private func randomInt(num:Int) ->Int{
         return Int(arc4random_uniform(UInt32(num)))

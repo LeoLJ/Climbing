@@ -25,14 +25,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e0q-Sh-Fc0">
-                                <rect key="frame" x="20" y="221" width="560" height="321"/>
+                                <rect key="frame" x="20" y="259" width="560" height="283"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="difficultyCell" id="rYN-B4-KZm">
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rYN-B4-KZm" id="R95-TD-bHh">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -46,15 +46,20 @@
                                     <segue destination="J50-H3-djW" kind="show" identifier="creatNewRoute" id="0el-UX-krP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="HZg-Zk-JXp">
-                                <rect key="frame" x="180" y="93" width="240" height="120"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rock" translatesAutoresizingMaskIntoConstraints="NO" id="HZg-Zk-JXp">
+                                <rect key="frame" x="20" y="93" width="560" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="XwY-AY-lgq"/>
                                     <constraint firstAttribute="height" constant="120" id="s9g-PZ-C0e"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XwY-AY-lgq"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfJ-3D-zuN">
-                                <rect key="frame" x="20" y="183" width="52" height="30"/>
+                                <rect key="frame" x="20" y="221" width="52" height="30"/>
                                 <state key="normal" title="Ran-EX"/>
                                 <connections>
                                     <action selector="goRandomEX:" destination="xSu-yh-Uz6" eventType="touchUpInside" id="aLd-Ji-jba"/>
@@ -65,6 +70,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="e0q-Sh-Fc0" firstAttribute="top" secondItem="HZg-Zk-JXp" secondAttribute="bottom" constant="8" id="2IY-tK-Ayk"/>
+                            <constraint firstItem="dfJ-3D-zuN" firstAttribute="leading" secondItem="HZg-Zk-JXp" secondAttribute="leading" id="75F-9Z-IYi"/>
+                            <constraint firstItem="dfJ-3D-zuN" firstAttribute="top" secondItem="HZg-Zk-JXp" secondAttribute="bottom" constant="8" id="BI1-vr-Y9p"/>
                             <constraint firstItem="KZw-gw-PyE" firstAttribute="centerX" secondItem="M9f-EE-DVY" secondAttribute="centerX" id="Gqs-BC-CgY"/>
                             <constraint firstItem="aDY-YA-bHk" firstAttribute="top" secondItem="Iu9-fF-7en" secondAttribute="bottom" id="McB-HR-kFx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="e0q-Sh-Fc0" secondAttribute="trailing" id="QpV-S2-IL9"/>
@@ -76,7 +83,14 @@
                             <constraint firstItem="HZg-Zk-JXp" firstAttribute="top" secondItem="aDY-YA-bHk" secondAttribute="bottom" constant="8" id="js4-8N-uAj"/>
                             <constraint firstItem="KZw-gw-PyE" firstAttribute="top" secondItem="e0q-Sh-Fc0" secondAttribute="bottom" constant="8" id="pUx-l1-QHB"/>
                             <constraint firstItem="e0q-Sh-Fc0" firstAttribute="leading" secondItem="M9f-EE-DVY" secondAttribute="leadingMargin" id="rRi-1J-DVU"/>
+                            <constraint firstItem="HZg-Zk-JXp" firstAttribute="width" secondItem="e0q-Sh-Fc0" secondAttribute="width" id="rYM-My-yYF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2IY-tK-Ayk"/>
+                                <exclude reference="SX9-0h-3J8"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="jQ4-o1-i1a"/>
                     <connections>
@@ -103,7 +117,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjx-B2-Dkr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjx-B2-Dkr">
                                 <rect key="frame" x="508" y="72" width="72" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,8 +161,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHART" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBm-8M-nQ5">
-                                <rect key="frame" x="243.5" y="74" width="114.5" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHART" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBm-8M-nQ5">
+                                <rect key="frame" x="244" y="74" width="114" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -161,7 +175,7 @@
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rwp-2f-BFF" id="343-8D-TjN">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n2-ld-D3f">
@@ -282,7 +296,7 @@
                                     <constraint firstAttribute="width" constant="120" id="yJG-Sr-y4q"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Climbing Field" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtW-cO-JOb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Choose Your Climbing Field" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtW-cO-JOb">
                                 <rect key="frame" x="195" y="221" width="210" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -296,7 +310,7 @@
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HKa-Yl-olq" id="Ugj-IQ-QBr">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -386,7 +400,7 @@
         <image name="rock" width="600" height="450"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="x5Z-O6-2Ib"/>
         <segue reference="HMh-bz-oPo"/>
-        <segue reference="a2P-PM-wV4"/>
     </inferredMetricsTieBreakers>
 </document>

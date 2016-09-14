@@ -124,10 +124,12 @@ class timeToPlayVC: UIViewController {
                 newTarget.image.tag = Int(newTarget.id!)
                 //newTarget.image.center = CGPoint.randomPoint.random(0...Int(self.view.bounds.maxX), rangeY:0...Int(self.view.bounds.maxY))
                 let i = randomNumArr[clickTime - 1]
-                newTarget.image.center = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
+                let ratioPoint = CGPointFromString(FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center![i])
+                newTarget.image.center = TargetHouse.shareInstance.convertScaleToPoint(ratioPoint)
                 TargetHouse.shareInstance.currentTargets.append(newTarget)
                 view.addSubview(newTarget.image)
                 clickTime += 1
+                
             }else if clickTime == FieldCollection.shareInstance.currentField[fieldIndex!].challangeRoute[routeIndex!].center!.count {
                 stop()
                 record()

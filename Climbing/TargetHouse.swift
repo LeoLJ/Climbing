@@ -29,5 +29,9 @@ class TargetHouse {
     func convertScaleToPoint(point: CGPoint) -> CGPoint {
         return CGPoint(x: point.x * mainWidth, y: point.y * mainHeight)
     }
+    
+    func convertScaleToPointForRandom(point: CGPoint) -> CGPoint {
+        return CGPoint(x: point.x * mainWidth / 2, y: point.y * mainHeight)
+    }
 
 }

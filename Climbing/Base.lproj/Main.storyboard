@@ -66,6 +66,13 @@
                                     <segue destination="6mk-XK-HT4" kind="show" identifier="Random-EX" id="bS8-BC-Pm0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kl5-fo-Le8">
+                                <rect key="frame" x="498" y="221" width="82" height="30"/>
+                                <state key="normal" title="Random-2P"/>
+                                <connections>
+                                    <action selector="goRandom2X:" destination="xSu-yh-Uz6" eventType="touchUpInside" id="AGa-Zq-6mq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -79,16 +86,18 @@
                             <constraint firstItem="dfJ-3D-zuN" firstAttribute="leading" secondItem="M9f-EE-DVY" secondAttribute="leadingMargin" id="SX9-0h-3J8"/>
                             <constraint firstItem="aDY-YA-bHk" firstAttribute="centerX" secondItem="M9f-EE-DVY" secondAttribute="centerX" id="XcU-ba-our"/>
                             <constraint firstItem="e0q-Sh-Fc0" firstAttribute="top" secondItem="dfJ-3D-zuN" secondAttribute="bottom" constant="8" id="g5W-ep-ehW"/>
+                            <constraint firstItem="kl5-fo-Le8" firstAttribute="trailing" secondItem="HZg-Zk-JXp" secondAttribute="trailing" id="h4U-VZ-gOC"/>
                             <constraint firstItem="YkV-zM-5au" firstAttribute="top" secondItem="KZw-gw-PyE" secondAttribute="bottom" constant="20" id="iH6-jr-sTJ"/>
                             <constraint firstItem="HZg-Zk-JXp" firstAttribute="top" secondItem="aDY-YA-bHk" secondAttribute="bottom" constant="8" id="js4-8N-uAj"/>
+                            <constraint firstItem="kl5-fo-Le8" firstAttribute="centerY" secondItem="dfJ-3D-zuN" secondAttribute="centerY" id="kYv-8j-fVk"/>
                             <constraint firstItem="KZw-gw-PyE" firstAttribute="top" secondItem="e0q-Sh-Fc0" secondAttribute="bottom" constant="8" id="pUx-l1-QHB"/>
                             <constraint firstItem="e0q-Sh-Fc0" firstAttribute="leading" secondItem="M9f-EE-DVY" secondAttribute="leadingMargin" id="rRi-1J-DVU"/>
                             <constraint firstItem="HZg-Zk-JXp" firstAttribute="width" secondItem="e0q-Sh-Fc0" secondAttribute="width" id="rYM-My-yYF"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="2IY-tK-Ayk"/>
                                 <exclude reference="SX9-0h-3J8"/>
+                                <exclude reference="2IY-tK-Ayk"/>
                             </mask>
                         </variation>
                     </view>
@@ -400,7 +409,7 @@
         <image name="rock" width="600" height="450"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bS8-BC-Pm0"/>
         <segue reference="x5Z-O6-2Ib"/>
-        <segue reference="HMh-bz-oPo"/>
     </inferredMetricsTieBreakers>
 </document>

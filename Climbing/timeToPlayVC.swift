@@ -9,11 +9,13 @@
 import UIKit
 import FirebaseDatabase
 
-class timeToPlayVC: UIViewController {
+class timeToPlayVC: UIViewController, UIGestureRecognizerDelegate {
     var fieldIndex: Int?
     var routeIndex: Int?
     var mode: String?
     var clickTime: Int = 1
+    var leftClickTime: Int = 1
+    var rightClickTime: Int = 1
     var startTime = NSTimeInterval()
     var timer = NSTimer()
     var tField: UITextField!
@@ -22,8 +24,10 @@ class timeToPlayVC: UIViewController {
     var targetNum: Int?
     var currentCenter = [String]()
     let ref = FIRDatabase.database().reference()
-
-
+    
+    var leftView = UIView()
+    var rightView = UIView()
+    
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
@@ -32,9 +36,9 @@ class timeToPlayVC: UIViewController {
         view.backgroundColor = UIColor.blackColor()
         let value = UIInterfaceOrientation.LandscapeLeft.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
-        self.view.layoutIfNeeded()
+        //self.view.layoutIfNeeded()
         
-        if mode == "Random-EX" {
+        if mode == "Random-EX" || mode == "Random-2P"{
             rankLabel.text = "Random-EX"
             displayAll()
         }else {
@@ -55,10 +59,15 @@ class timeToPlayVC: UIViewController {
     override func viewWillAppear(animated: Bool) {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(timeToPlayVC.tapBubbleOnce), name: "tapBubbleOnce:", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(timeToPlayVC.tapLeftBubble), name: "tapBubbleFromLeftView:", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(timeToPlayVC.tapRightBubble), name: "tapBubbleFromRightView:", object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "tapBubbleOnce:", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "tapBubbleFromLeftView:", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "tapBubbleFromRightView:", object: nil)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +92,37 @@ class timeToPlayVC: UIViewController {
                 newTarget.image.center = TargetHouse.shareInstance.convertScaleToPoint(ratioPoint)
                 TargetHouse.shareInstance.currentTargets.append(newTarget)
                 view.addSubview(newTarget.image)
-        }
+            }else if mode == "Random-2P" {
+                var width: CGFloat = 0
+                var height: CGFloat = 0
+                if self.view.frame.size.width > self.view.frame.size.height {
+                    width = self.view.frame.size.width
+                    height = self.view.frame.size.height
+                }else{
+                    width = self.view.frame.size.height
+                    height = self.view.frame.size.width
+                }
+                leftView.frame = CGRect(x: 0, y: 0, width: width / 2, height: height)
+                leftView.backgroundColor = UIColor.blackColor()
+                rightView.frame = CGRect(x: width / 2, y: 0, width: width / 2, height: height)
+                rightView.backgroundColor = UIColor.blackColor()
+                view.addSubview(leftView)
+                view.addSubview(rightView)
+                let newTarget = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)", modeDection: true)
+                let newTarget2 = TargetFactory().createTarget("\(TargetHouse.shareInstance.currentTargets.count)", modeDection: true)
+                newTarget.position = .Left
+                newTarget2.position = .Right
+                //newTarget.image.tag = Int(newTarget.id!)
+                let ratioPoint = CGPoint(x: 0.2, y: 0.9)
+                newTarget.image.center = TargetHouse.shareInstance.convertScaleToPoint(ratioPoint)
+                newTarget2.image.center = TargetHouse.shareInstance.convertScaleToPoint(ratioPoint)
+                TargetHouse.shareInstance.currentTargets.append(newTarget)
+                TargetHouse.shareInstance.currentTargets.append(newTarget2)
+                
+                leftView.addSubview(newTarget.image)
+                rightView.addSubview(newTarget2.image)
+                
+            }
     }
     
     override func willMoveToParentViewController(parent: UIViewController?) {
@@ -136,6 +175,7 @@ class timeToPlayVC: UIViewController {
                 record()
             }
         case "Random-EX"?:
+            
             if clickTime < targetNum  {
                 if clickTime == 1 {
                     start()
@@ -166,6 +206,54 @@ class timeToPlayVC: UIViewController {
         default: break
         }
     }
+    
+    func tapLeftBubble() {
+        if leftClickTime < targetNum  {
+            if leftClickTime == 1 {
+                start()
+            }
+            let newTarget = TargetFactory().createTarget("\(leftClickTime)", modeDection: true)
+            newTarget.position = .Left
+            newTarget.image.tag = Int(newTarget.id!)
+            let randomNumX:Double = Double(randomIntFromRange(1000000...9000000)) / Double(10000000)
+            let randomNumY:Double = Double(randomIntFromRange(1000000...9000000)) / Double(10000000)
+            let randomCGPoint = CGPoint(x: randomNumX, y: randomNumY)
+            newTarget.image.center = TargetHouse.shareInstance.convertScaleToPointForRandom(randomCGPoint)
+            TargetHouse.shareInstance.currentTargets.append(newTarget)
+            leftView.addSubview(newTarget.image)
+            leftClickTime += 1
+        }else if leftClickTime == targetNum {
+            stop()
+            showWinner("Left")
+            //record()
+        }
+
+    }
+    
+    func tapRightBubble() {
+        if rightClickTime < targetNum  {
+            if rightClickTime == 1 {
+                start()
+            }
+            let newTarget = TargetFactory().createTarget("\(rightClickTime)", modeDection: true)
+            newTarget.position = .Right
+            newTarget.image.tag = Int(newTarget.id!)
+            let randomNumX:Double = Double(randomIntFromRange(1000000...9000000)) / Double(10000000)
+            let randomNumY:Double = Double(randomIntFromRange(1000000...9000000)) / Double(10000000)
+            let randomCGPoint = CGPoint(x: randomNumX, y: randomNumY)
+            newTarget.image.center = TargetHouse.shareInstance.convertScaleToPointForRandom(randomCGPoint)
+            TargetHouse.shareInstance.currentTargets.append(newTarget)
+            rightView.addSubview(newTarget.image)
+            rightClickTime += 1
+        }else if rightClickTime == targetNum {
+            stop()
+            showWinner("Right")
+            //record()
+        }
+
+    }
+
+    
     
     func generateNumberFrom(count: Int) -> [Int] {
         
@@ -274,6 +362,32 @@ extension timeToPlayVC {
     
     func stop() {
         timer.invalidate()
+    }
+    
+    func showWinner(winner: String) {
+        let alert = UIAlertController(title: "Congrats", message: "\(winner) player is the winner!", preferredStyle: .Alert)
+        let quitAction = UIAlertAction(title: "Quit", style: .Default) { (_) in
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        let againAction = UIAlertAction(title: "Play Again", style: .Default) { (_) in
+            self.leftClickTime = 1
+            self.rightClickTime = 1
+            TargetHouse.shareInstance.currentTargets.removeAll()
+            for view: UIView in self.leftView.subviews {
+                if (view is UIImageView) {
+                    view.removeFromSuperview()
+                }
+            }
+            for view: UIView in self.rightView.subviews {
+                if (view is UIImageView) {
+                    view.removeFromSuperview()
+                }
+            }
+            self.displayAll()
+        }
+        alert.addAction(quitAction)
+        alert.addAction(againAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }
     //MARK show alert and also record score

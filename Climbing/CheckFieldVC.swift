@@ -74,6 +74,21 @@ class CheckFieldVC: UIViewController {
             self.presentViewController(nameAlert, animated: true, completion: {
             })
     }
+    
+    
+    @IBAction func goRandom2X(sender: AnyObject) {
+        let nameAlert = UIAlertController(title: "Give A Number", message: "", preferredStyle: .Alert)
+        nameAlert.addTextFieldWithConfigurationHandler(self.configurationTextField)
+        nameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler:nil))
+        nameAlert.addAction(UIAlertAction(title: "Done", style: .Default, handler:{ (UIAlertAction) in
+            self.targetNum = Int(self.tField.text!)
+            self.performSegueWithIdentifier("letsPlay", sender: "Random-2P")
+        }))
+        self.presentViewController(nameAlert, animated: true, completion: {
+        })
+    }
+    
+    
     // Get Route data form firebase
     func getRouteFromFirebase() {
             FieldCollection.shareInstance.currentField[self.index!].challangeRoute.removeAll()

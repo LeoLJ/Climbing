@@ -16,6 +16,7 @@ class TargetFactory {
     let id = arc4random()
     var timer: NSTimer?
     
+    
     func createTarget(imageName: String, modeDection: Bool) -> TargetModel {
         
         target.backgroundColor = UIColor.whiteColor()
@@ -71,3 +72,4 @@ class TargetFactory {
 //    }
 
 }
+

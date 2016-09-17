@@ -16,27 +16,44 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
     var id: UInt32?
     let systemSoundID: SystemSoundID = 1016
     var modeDetection: Bool
-
-
+    var position: TargetPosition?
+    
     
     func tapBubbleOnce(sender: UITapGestureRecognizer?) {
-        if image.backgroundColor == UIColor.whiteColor() {
-        image.image = UIImage(named: "Smile")
-            image.backgroundColor = UIColor.clearColor()
-            image.layer.sublayers?.removeAll()
-            AudioServicesPlaySystemSound (systemSoundID)
-        //    image.image = UIImage(named: "pika")
-        //TargetHouse.shareInstance.currentPoint += 1
-            NSNotificationCenter.defaultCenter().postNotificationName("tapBubbleOnce:", object: nil)
+        if position != nil{
+            if image.backgroundColor == UIColor.whiteColor() {
+                image.image = UIImage(named: "Smile")
+                image.backgroundColor = UIColor.clearColor()
+                image.layer.sublayers?.removeAll()
+                AudioServicesPlaySystemSound (systemSoundID)
+            }
+            
+            if position == .Left {
+            NSNotificationCenter.defaultCenter().postNotificationName("tapBubbleFromLeftView:", object: nil)
+            }else {
+            NSNotificationCenter.defaultCenter().postNotificationName("tapBubbleFromRightView:", object: nil)
+            }
+            
+        }else {
+            if image.backgroundColor == UIColor.whiteColor() {
+                image.image = UIImage(named: "Smile")
+                image.backgroundColor = UIColor.clearColor()
+                image.layer.sublayers?.removeAll()
+                AudioServicesPlaySystemSound (systemSoundID)
+                //    image.image = UIImage(named: "pika")
+                //TargetHouse.shareInstance.currentPoint += 1
+                NSNotificationCenter.defaultCenter().postNotificationName("tapBubbleOnce:", object: nil)
+            }
         }
+        
     }
     
     
     func tapBubbleTwice(sender: UITapGestureRecognizer?) {
         if image.image == UIImage(named: "smile") {
-        image.backgroundColor = UIColor.whiteColor()
-        //    image.image = UIImage(named: "pokeball")
-        //TargetHouse.shareInstance.currentPoint -= 1
+            image.backgroundColor = UIColor.whiteColor()
+            //    image.image = UIImage(named: "pokeball")
+            //TargetHouse.shareInstance.currentPoint -= 1
         }
     }
     
@@ -51,11 +68,11 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
     func dragTarget(recognizer: UIPanGestureRecognizer) {
         let point = recognizer.locationInView(mainView);
         if point.y < (mainFrame?.minY)! + 30 || point.x > (mainFrame?.maxX)! - 20 || point.x < (mainFrame?.minX)! + 35 {
-//                let newframe = CGRectMake(point.x, point.y, 60, 60)
-//                image.frame = newframe
+            //                let newframe = CGRectMake(point.x, point.y, 60, 60)
+            //                image.frame = newframe
         }else{
-        image.center.x = point.x
-        image.center.y = point.y
+            image.center.x = point.x
+            image.center.y = point.y
         }
     }
     
@@ -92,8 +109,8 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
         image.addGestureRecognizer(dragBall)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(TargetModel.longPressBubble(_:)))
-        image.addGestureRecognizer(longPress)        
-
+        image.addGestureRecognizer(longPress)
+        
         dragBall.delegate = self
         
         
@@ -110,5 +127,11 @@ class TargetModel: NSObject, UIGestureRecognizerDelegate {
             print("Error getting the audio file")
         }
     }
+    
+}
 
+
+enum TargetPosition {
+    case Left
+    case Right
 }
